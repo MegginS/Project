@@ -15,7 +15,7 @@ class User(db.Model):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
  
-    user_product = db.relationship("User_product", back_populates="users")
+    user_products = db.relationship("User_product", back_populates="users")
 
     def __repr__(self):
         return f'<User id={self.id} email={self.email}>'
@@ -30,8 +30,8 @@ class User_product(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
     favorable = db.Column(db.Boolean, nullable=False)
 
-    user = db.relationship("User", back_populates="user_products")
-    product = db.relationship("Product", back_populates="user_products")
+    users = db.relationship("User", back_populates="user_products")
+    products = db.relationship("Product", back_populates="user_products")
 
     def __repr__(self):
         return f'<User Product id={self.id} user={self.user.first_name} product ={self.product.name}>'
@@ -46,30 +46,34 @@ class Product(db.Model):
     contains_palm = db.Column(db.Boolean, nullable=False)
     rspo_certified = db.Column(db.Boolean, nullable=False)
     fdc_id = db.Column(db.Integer, nullable = False)
-    ingredients = db.Column(db.Array, nullable = False)
+    ingredients = db.Column(db.String, nullable = False)
     brand = db.Column(db.String(50), nullable=False)
    
-    user_product = db.relationship("User_product", back_populates="products")
+    user_products = db.relationship("User_product", back_populates="products")
+    products_with_palm = db.relationship("Product_with_palm", back_populates="products")
 
     def __repr__(self):
         return f'<Product id={self.id} product name={self.name}>'
     
+class Product_with_palm(db.Model):
+    """A product containing palm"""
 
+    __tablename__ = "products_with_palm"
 
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
+    palm_alias_id = db.Column(db.Integer, db.ForeignKey("palm_aliases.id"))
 
+    products = db.relationship("Product", back_populates="products_with_palm")
+    palm_aliases = db.relationship("Palm_alias", back_populates="products_with_palm")
 
-def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
-    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-    flask_app.config["SQLALCHEMY_ECHO"] = echo
-    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+class Palm_alias(db.Model):
+    """A palm alias"""
 
-    db.app = flask_app
-    db.init_app(flask_app)
+    __tablename__ = "palm_aliases"
 
-    print("Connected to the db!")
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    alias_name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
 
-
-if __name__ == "__main__":
-    from server import app
-
-    connect_to_db(app)
+    products_with_palm = db.relationship("Product_with_palm", back_populates="palm_aliases")

@@ -34,7 +34,7 @@ class User_product(db.Model):
     products = db.relationship("Product", back_populates="user_products")
 
     def __repr__(self):
-        return f'<User Product id={self.id} user={self.user.first_name} product ={self.product.name}>'
+        return f'<User Product id={self.id} user={self.users.first_name} product ={self.products.name}>'
 
 class Product(db.Model):
     """A product."""
@@ -77,3 +77,20 @@ class Palm_alias(db.Model):
     description = db.Column(db.String(200), nullable=False)
 
     products_with_palm = db.relationship("Product_with_palm", back_populates="palm_aliases")
+
+
+def connect_to_db(flask_app, db_uri="postgresql:///palm", echo=True):
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print("Connected to the palm db!")
+
+
+if __name__ == "__main__":
+    from flask_app import app
+
+    connect_to_db(app)

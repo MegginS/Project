@@ -43,11 +43,11 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    contains_palm = db.Column(db.Boolean, nullable=False)
-    rspo_certified = db.Column(db.Boolean, nullable=False)
-    fdc_id = db.Column(db.Integer, nullable = False)
-    ingredients = db.Column(db.String, nullable = False)
-    brand = db.Column(db.String(50), nullable=False)
+    contains_palm = db.Column(db.String(10), nullable=True)
+    rspo_certified = db.Column(db.Boolean, nullable=True)
+    fdc_id = db.Column(db.Integer, nullable = True)
+    ingredients = db.Column(db.ARRAY(db.String), nullable = False)
+    brand = db.Column(db.String(50), nullable=True)
    
     user_products = db.relationship("User_product", back_populates="products")
     products_with_palm = db.relationship("Product_with_palm", back_populates="products")
@@ -86,8 +86,6 @@ def connect_to_db(flask_app, db_uri="postgresql:///palm", echo=True):
 
     db.app = flask_app
     db.init_app(flask_app)
-
-    print("Connected to the palm db!")
 
 
 if __name__ == "__main__":

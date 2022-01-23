@@ -2,7 +2,7 @@ import requests
 import re
 
 payload = {
-            'query': 'Nutella',
+            'query': 'nutella',
             'dataType': 'Branded',
             'brandOwner': '',
             'pageSize': '2',
@@ -32,16 +32,17 @@ for i in range(len(foods)):
     ingredients = ingredients_string.split(", ")
     contains_palm = False
     palm_ingredients = []
-    for palm_alias in palm_aliases:
-        if palm_alias.upper() in ingredients:
-            contains_palm = True
-            palm_ingredients.append(palm_alias.upper())
     palm_names = p.findall(ingredients_string)
     if palm_names != []:
         contains_palm = True
         for palm_name in palm_names:
-            if palm_name not in palm_ingredients:
-                palm_ingredients.append(palm_name)
+            palm_name = palm_name.strip(" ")
+            palm_ingredients.append(palm_name)
+    for palm_alias in palm_aliases:
+        if palm_alias.upper() in ingredients:
+            contains_palm = True
+            if palm_alias.upper() not in palm_ingredients:
+                palm_ingredients.append(palm_alias.upper())
 
     print(name, descriptor, fdc_id, brand, contains_palm, ingredients, palm_ingredients)
 

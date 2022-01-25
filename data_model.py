@@ -52,6 +52,16 @@ class Product(db.Model):
     user_products = db.relationship("User_product", back_populates="products")
     products_with_palm = db.relationship("Product_with_palm", back_populates="products")
 
+def create_product(self, name, contains_palm, fdc_id, ingredients, brand):
+    """Create and return a product."""
+    product = Product(name = name,
+                     contains_palm = contains_palm,
+                     fdc_id = fdc_id,
+                     ingredients = ingredients,
+                     brand = brand)
+
+    return product
+
     def __repr__(self):
         return f'<Product id={self.id} product name={self.name}>'
     
@@ -66,6 +76,15 @@ class Product_with_palm(db.Model):
 
     products = db.relationship("Product", back_populates="products_with_palm")
     palm_aliases = db.relationship("Palm_alias", back_populates="products_with_palm")
+
+def create_product_with_palm(self, product_id, palm_alias_id):
+    """Create and return a palm product."""
+    palm_product = Product_with_palm(
+                    product_id = product_id,
+                    palm_alias_id = palm_alias_id)
+                     
+    return palm_product
+
 
 class Palm_alias(db.Model):
     """A palm alias"""

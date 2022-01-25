@@ -1,5 +1,6 @@
 import requests
 import re
+from model import db, Product, Product_with_palm, create_product, create_product_with_palm, connect_to_db
 
 payload = {
             'query': 'nutella',
@@ -43,6 +44,17 @@ for i in range(len(foods)):
             contains_palm = True
             if palm_alias.upper() not in palm_ingredients:
                 palm_ingredients.append(palm_alias.upper())
+    new_product = create_product(name, contains_palm, fdc_id, ingredients, brand)
+    db.session.add(new_product)
+    db.session.commit()
+    if contains_palm is True:
+        new_palm_product = create_product_with_palm(new_product.id, alias.id)
+# need to define alias id
+        db.session.add(new_palm_product)
+        db.session.commit()
 
-    print(name, descriptor, fdc_id, brand, contains_palm, ingredients, palm_ingredients)
 
+
+
+
+print(name, descriptor, fdc_id, brand, contains_palm, ingredients, palm_ingredients)

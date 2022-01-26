@@ -1,6 +1,6 @@
 import requests
 import re
-from model import db, Product, Product_with_palm, create_product, create_product_with_palm, connect_to_db
+from data_model import db, Product, Product_with_palm, create_product, create_product_with_palm, connect_to_db
 
 payload = {
             'query': 'nutella',

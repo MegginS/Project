@@ -15,7 +15,7 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable=False)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
- 
+
     user_products = db.relationship("User_product", back_populates="users")
 
     def __repr__(self):
@@ -48,11 +48,11 @@ class Product(db.Model):
     fdc_id = db.Column(db.Integer, nullable = True)
     ingredients = db.Column(db.ARRAY(db.String), nullable = False)
     brand = db.Column(db.String(50), nullable=True)
-   
+
     user_products = db.relationship("User_product", back_populates="products")
     products_with_palm = db.relationship("Product_with_palm", back_populates="products")
 
-def create_product(self, name, contains_palm, fdc_id, ingredients, brand):
+def create_product(name, contains_palm, fdc_id, ingredients, brand):
     """Create and return a product."""
     product = Product(name = name,
                      contains_palm = contains_palm,
@@ -64,7 +64,7 @@ def create_product(self, name, contains_palm, fdc_id, ingredients, brand):
 
     def __repr__(self):
         return f'<Product id={self.id} product name={self.name}>'
-    
+
 class Product_with_palm(db.Model):
     """A product containing palm"""
 
@@ -77,12 +77,12 @@ class Product_with_palm(db.Model):
     products = db.relationship("Product", back_populates="products_with_palm")
     palm_aliases = db.relationship("Palm_alias", back_populates="products_with_palm")
 
-def create_product_with_palm(self, product_id, palm_alias_id):
+def create_product_with_palm(product_id, palm_alias_id):
     """Create and return a palm product."""
     palm_product = Product_with_palm(
                     product_id = product_id,
                     palm_alias_id = palm_alias_id)
-                     
+                    
     return palm_product
 
 
@@ -97,6 +97,13 @@ class Palm_alias(db.Model):
 
     products_with_palm = db.relationship("Product_with_palm", back_populates="palm_aliases")
 
+def create_alias(alias_name, description):
+    "Create and return a palm alias"
+    palm_alias = Palm_alias(
+                            alias_name = alias_name,
+                            description = description)
+
+    return palm_alias
 
 def connect_to_db(flask_app, db_uri="postgresql:///palm", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri

@@ -1,122 +1,102 @@
 [
     {
       "alias_name": "Palm Oil",
-      "description": "https://image.tmdb.org/t/p/original//xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg",
+      "description": "palm oil"
     },
     {
       "alias_name": "Palm Kernel",
-      "description": "https://image.tmdb.org/t/p/original//8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg",
+      "description": "seed of the oil palm fruit"
     },
     {
       "alias_name": "Palm Kernel Oil",
-      "description": "https://image.tmdb.org/t/p/original//jHo2M1OiH9Re33jYtUQdfzPeUkx.jpg",
+      "description": "palm oil produced by crushing the kernel of the oil palm fruit"
     },
     {
       "alias_name": "Palm Fruit Oil",
-      "description": "https://image.tmdb.org/t/p/original//niyXFhGIk4W2WTcX2Eod8vx2Mfe.jpg",
+      "description": "palm oil"
     },
     {
       "alias_name": "Palmate",
-      "description": "https://image.tmdb.org/t/p/original//5jdLnvALCpK1NkeQU1z4YvOe2dZ.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Palmitate",
-      "description": "https://image.tmdb.org/t/p/original//iZf0KyrE25z1sage4SYFLCCrMi9.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "hexadecanoic acid",
-      "description": "https://image.tmdb.org/t/p/original//aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg",
+      "description": "also known as Palmitic acid, derived from palm oil"
     },
     {
       "alias_name": "Palm olein",
-      "description": "https://image.tmdb.org/t/p/original//udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
-    },
-    {
-      "alias_name": "Glyceryl Stearate",
-      "description": "https://image.tmdb.org/t/p/original//h4VB6m0RwcicVEZvzftYZyKXs6K.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Stearic Acid",
-      "description": "https://image.tmdb.org/t/p/original//y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Elaeis Guineensis",
-      "description": "https://image.tmdb.org/t/p/original//qa6HCwP4Z15l3hpsASz3auugEW6.jpg",
+      "description": "Elaeis guineensis is a species of palm, also known as 'oil palm', it is the principal source of palm oil"
     },
     {
       "alias_name": "Palmitic Acid",
-      "description": "https://image.tmdb.org/t/p/original//7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+      "description": "also known as hexadecanoic acid, derived from palm oil"
     },
     {
       "alias_name": "Palm Stearine",
-      "description": "https://image.tmdb.org/t/p/original//wlfDxbGEsW58vGhFljKkcR5IxDj.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Palmitoyl Oxostearamide",
-      "description": "https://image.tmdb.org/t/p/original//pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Palmitoyl Tetrapeptide",
-      "description": "https://image.tmdb.org/t/p/original//c01Y4suApJ1Wic2xLmaq1QYcfoZ.jpg",
-    },
-    {
-      "alias_name": "Sodium Laureth Sulfate",
-      "description": "https://image.tmdb.org/t/p/original//db32LaOibwEliAmSL2jjDF6oDdj.jpg",
-    },
-    {
-      "alias_name": "Sodium Lauryl Sulfate",
-      "description": "https://image.tmdb.org/t/p/original//f4aul3FyD3jv3v4bul1IrkWZvzq.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Sodium Kernelate",
-      "description": "https://image.tmdb.org/t/p/original//A2YlIrzypvhS3vTFMcDkG3xLvac.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Sodium Palm Kernelate",
-      "description": "https://image.tmdb.org/t/p/original//9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-    },
-    {
-      "alias_name": "Sodium Lauryl Lactylate",
-      "description": "https://image.tmdb.org/t/p/original//3iYQTLGoy7QnjcUYRJy4YrAgGvp.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Vitamin A Palmitate",
-      "description": "https://image.tmdb.org/t/p/original//gzlbb3yeVISpQ3REd3Ga1scWGTU.jpg",
+      "description": "derived from palm oil"
     },
     {
         "alias_name": "Asorbyl Palmitate",
-        "description": "https://image.tmdb.org/t/p/original//gzlbb3yeVISpQ3REd3Ga1scWGTU.jpg",
+        "description": "derived from palm oil"
       },
     {
       "alias_name": "Hydrated Palm Glycerides",
-      "description": "https://image.tmdb.org/t/p/original//wuMc08IPKEatf9rnMNXvIDxqP4W.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Etyl Palmitate",
-      "description": "https://image.tmdb.org/t/p/original//6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Octyl Palmitate",
-      "description": "https://image.tmdb.org/t/p/original//gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+      "description": "derived from palm oil"
     },
     {
       "alias_name": "Palmityl Alcohol",
-      "description": "https://image.tmdb.org/t/p/original//5EufsDwXdY2CVttYOk2WtYhgKpa.jpg",
-    }
+      "description": "derived from palm oil"
+    },
     {
         "alias_name": "Fractionated Palm Oil",
-        "description": "https://image.tmdb.org/t/p/original//c01Y4suApJ1Wic2xLmaq1QYcfoZ.jpg",
+        "description": "derived from palm oil"
       },
       {
         "alias_name": "Partially hydrogenated Palm Oil",
-        "description": "https://image.tmdb.org/t/p/original//db32LaOibwEliAmSL2jjDF6oDdj.jpg",
+        "description": "derived from palm oil"
       },
       {
         "alias_name": "Palm Kernel Stearin",
-        "description": "https://image.tmdb.org/t/p/original//f4aul3FyD3jv3v4bul1IrkWZvzq.jpg",
-      },
-      {
-        "alias_name": "Sodium Stearoyl Lactylate",
-        "description": "https://image.tmdb.org/t/p/original//f4aul3FyD3jv3v4bul1IrkWZvzq.jpg",
+        "description": "derived from palm oil"
       }
 ]

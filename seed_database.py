@@ -4,8 +4,8 @@ import json
 import flask_app
 import data_model
 
-# os.system("dropdb palm)
-# os.system('createdb palm')
+os.system("dropdb palm")
+os.system('createdb palm')
 
 data_model.connect_to_db(flask_app.app)
 data_model.db.create_all()

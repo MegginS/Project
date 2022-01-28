@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     """A user."""
 
@@ -21,6 +22,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User id={self.id} email={self.email}>'
 
+
 class User_product(db.Model):
     """A product saved by a user."""
 
@@ -30,12 +32,14 @@ class User_product(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
     favorable = db.Column(db.Boolean, nullable=False)
+    # is favorable necessary?
 
     users = db.relationship("User", back_populates="user_products")
     products = db.relationship("Product", back_populates="user_products")
 
     def __repr__(self):
         return f'<User Product id={self.id} user={self.users.first_name} product ={self.products.name}>'
+
 
 class Product(db.Model):
     """A product."""
@@ -65,6 +69,7 @@ def create_product(name, contains_palm, fdc_id, ingredients, brand):
     def __repr__(self):
         return f'<Product id={self.id} product name={self.name}>'
 
+
 class Product_with_palm(db.Model):
     """A product containing palm"""
 
@@ -85,7 +90,6 @@ def create_product_with_palm(product_id, palm_alias_id):
                     
     return palm_product
 
-
 class Palm_alias(db.Model):
     """A palm alias"""
 
@@ -102,8 +106,10 @@ def create_alias(alias_name, description):
     palm_alias = Palm_alias(
                             alias_name = alias_name,
                             description = description)
+    return palm_alias 
 
-    return palm_alias
+
+
 
 def connect_to_db(flask_app, db_uri="postgresql:///palm", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
@@ -116,5 +122,7 @@ def connect_to_db(flask_app, db_uri="postgresql:///palm", echo=True):
 
 if __name__ == "__main__":
     from flask_app import app
-
     connect_to_db(app)
+
+    palm_list = Palm_alias.query.all()
+    print(palm_list)

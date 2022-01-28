@@ -1,102 +1,102 @@
 [
     {
-      "alias_name": "Palm Oil",
+      "alias_name": "PALM OIL",
       "description": "palm oil"
     },
     {
-      "alias_name": "Palm Kernel",
+      "alias_name": "PALM KERNEL",
       "description": "seed of the oil palm fruit"
     },
     {
-      "alias_name": "Palm Kernel Oil",
+      "alias_name": "PALM KERNEL OIL",
       "description": "palm oil produced by crushing the kernel of the oil palm fruit"
     },
     {
-      "alias_name": "Palm Fruit Oil",
+      "alias_name": "PALM FRUIT OIL ",
       "description": "palm oil"
     },
     {
-      "alias_name": "Palmate",
+      "alias_name": "PALMATE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Palmitate",
+      "alias_name": "PALMITATE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "hexadecanoic acid",
+      "alias_name": "HEXANDECANOIC ACID",
       "description": "also known as Palmitic acid, derived from palm oil"
     },
     {
-      "alias_name": "Palm olein",
+      "alias_name": "PALM OLEIN",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Stearic Acid",
+      "alias_name": "STEARIC ACID",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Elaeis Guineensis",
+      "alias_name": "ELAEIS GUINEENSIS",
       "description": "Elaeis guineensis is a species of palm, also known as 'oil palm', it is the principal source of palm oil"
     },
     {
-      "alias_name": "Palmitic Acid",
+      "alias_name": "PALMITIC ACID",
       "description": "also known as hexadecanoic acid, derived from palm oil"
     },
     {
-      "alias_name": "Palm Stearine",
+      "alias_name": "PALM STEARINE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Palmitoyl Oxostearamide",
+      "alias_name": "PALMITOYL OXOSTEARAMIDE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Palmitoyl Tetrapeptide",
+      "alias_name": "PALMITOYL TETRAPEPTIDE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Sodium Kernelate",
+      "alias_name": "SODIUM KERNELATE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Sodium Palm Kernelate",
+      "alias_name": "SODIUM PALM KERNELATE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Vitamin A Palmitate",
+      "alias_name": "VITAMIN A PALMITATE",
       "description": "derived from palm oil"
     },
     {
-        "alias_name": "Asorbyl Palmitate",
+        "alias_name": "ASORBYL PALMITATE",
         "description": "derived from palm oil"
       },
     {
-      "alias_name": "Hydrated Palm Glycerides",
+      "alias_name": "HYDRATED PALM GLYCERIDES",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Etyl Palmitate",
+      "alias_name": "ETYL PALMITATE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Octyl Palmitate",
+      "alias_name": "OCTYL PALMITATE",
       "description": "derived from palm oil"
     },
     {
-      "alias_name": "Palmityl Alcohol",
+      "alias_name": "PALMITYL ALCOHOL",
       "description": "derived from palm oil"
     },
     {
-        "alias_name": "Fractionated Palm Oil",
-        "description": "derived from palm oil"
-      },
-      {
-        "alias_name": "Partially hydrogenated Palm Oil",
-        "description": "derived from palm oil"
+        "alias_name": "FRACTIONATED PALM OIL",
+        "description": "palm oil"
       },
       {
-        "alias_name": "Palm Kernel Stearin",
+        "alias_name": "PARTIALLY HYDROGENATED PALM OIL",
+        "description": "palm oil"
+      },
+      {
+        "alias_name": "PALM KERNEL STEARIN",
         "description": "derived from palm oil"
       }
 ]

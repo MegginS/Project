@@ -57,10 +57,11 @@ for i in range(len(foods)):
             alias = data_model.Palm_alias.query.filter(data_model.Palm_alias.alias_name == palm_ingredient).all()
             if alias != []:
                 product_palm = data_model.create_product_with_palm(new_product.id, alias[0].id)
+            elif alias == []:
+                other_alias = data_model.Palm_alias.query.filter(data_model.Palm_alias.alias_name == "OTHER PALM OIL INGREDIENT").all()
+                product_palm = data_model.create_product_with_palm(new_product.id, other_alias[0].id)
 
         data_model.db.session.add(product_palm)
         data_model.db.session.commit()
 
 print(name, descriptor, fdc_id, brand, contains_palm, ingredients, palm_ingredients)
-
-# add new aliases when one is not database

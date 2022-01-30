@@ -17,13 +17,21 @@ class User(db.Model):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
 
-    user_products = db.relationship("User_product", back_populates="users")
+    user_products = db.relationship("UserProduct", back_populates="users")
 
-    def __repr__(self):
-        return f'<User id={self.id} email={self.email}>'
+def create_user(email, password, first_name, last_name):
+    """Create and return a new user."""
+
+    new_user = User(
+                    email = email,
+                    password = password,
+                    first_name = first_name,
+                    last_name = last_name)
+                    
+    return new_user
 
 
-class User_product(db.Model):
+class UserProduct(db.Model):
     """A product saved by a user."""
 
     __tablename__ = "user_products"
@@ -31,14 +39,18 @@ class User_product(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
-    favorable = db.Column(db.Boolean, nullable=False)
-    # is favorable necessary?
 
     users = db.relationship("User", back_populates="user_products")
     products = db.relationship("Product", back_populates="user_products")
 
-    def __repr__(self):
-        return f'<User Product id={self.id} user={self.users.first_name} product ={self.products.name}>'
+def create_saved_product(product_id, user_id):
+    """Create and return a users product."""
+
+    saved_product = UserProduct(
+                    product_id = product_id,
+                    user_id = user_id)
+                    
+    return saved_product
 
 
 class Product(db.Model):
@@ -47,18 +59,21 @@ class Product(db.Model):
     __tablename__ = "products"
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    contains_palm = db.Column(db.String(10), nullable=True)
+    name = db.Column(db.String(50), nullable=True)
+    descriptor = db.Column(db.String(200), nullable = True)
+    contains_palm = db.Column(db.String(10), nullable = True)
     fdc_id = db.Column(db.Integer, nullable = True)
-    ingredients = db.Column(db.ARRAY(db.String), nullable = False)
+    ingredients = db.Column(db.ARRAY(db.String), nullable = True)
     brand = db.Column(db.String(50), nullable=True)
 
-    user_products = db.relationship("User_product", back_populates="products")
-    products_with_palm = db.relationship("Product_with_palm", back_populates="products")
+    user_products = db.relationship("UserProduct", back_populates="products")
+    products_with_palm = db.relationship("ProductWithPalm", back_populates="products")
 
-def create_product(name, contains_palm, fdc_id, ingredients, brand):
+
+def create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand):
     """Create and return a product."""
     product = Product(name = name,
+                     descriptor = descriptor,
                      contains_palm = contains_palm,
                      fdc_id = fdc_id,
                      ingredients = ingredients,
@@ -66,11 +81,8 @@ def create_product(name, contains_palm, fdc_id, ingredients, brand):
 
     return product
 
-    def __repr__(self):
-        return f'<Product id={self.id} product name={self.name}>'
 
-
-class Product_with_palm(db.Model):
+class ProductWithPalm(db.Model):
     """A product containing palm"""
 
     __tablename__ = "products_with_palm"
@@ -80,17 +92,18 @@ class Product_with_palm(db.Model):
     palm_alias_id = db.Column(db.Integer, db.ForeignKey("palm_aliases.id"))
 
     products = db.relationship("Product", back_populates="products_with_palm")
-    palm_aliases = db.relationship("Palm_alias", back_populates="products_with_palm")
+    palm_aliases = db.relationship("PalmAlias", back_populates="products_with_palm")
 
 def create_product_with_palm(product_id, palm_alias_id):
     """Create and return a palm product."""
-    palm_product = Product_with_palm(
+    palm_product = ProductWithPalm(
                     product_id = product_id,
                     palm_alias_id = palm_alias_id)
                     
     return palm_product
 
-class Palm_alias(db.Model):
+
+class PalmAlias(db.Model):
     """A palm alias"""
 
     __tablename__ = "palm_aliases"
@@ -99,16 +112,14 @@ class Palm_alias(db.Model):
     alias_name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(200), nullable=False)
 
-    products_with_palm = db.relationship("Product_with_palm", back_populates="palm_aliases")
+    products_with_palm = db.relationship("ProductWithPalm", back_populates="palm_aliases")
 
 def create_alias(alias_name, description):
     "Create and return a palm alias"
-    palm_alias = Palm_alias(
+    palm_alias = PalmAlias(
                             alias_name = alias_name,
                             description = description)
-    return palm_alias 
-
-
+    return palm_alias
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///palm", echo=True):
@@ -124,5 +135,4 @@ if __name__ == "__main__":
     from flask_app import app
     connect_to_db(app)
 
-    palm_list = Palm_alias.query.all()
-    print(palm_list)
+    palm_list = PalmAlias.query.all()

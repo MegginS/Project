@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Palm Oil Home{% endblock %}
+
+{% block body %}
+
+<form class="form-search" action="/results" method="POST">
+
+  <h2 class="form-search-heading">Palm Oil Search</h2>
+
+  <div class="search">
+    <input type="search"
+           name="search"
+           class="form-control input-lg"
+           placeholder="Food Product">
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block search" type="submit">Unearth
+  </button>
+
+</form>
+
+</body>
+</html>
+
+{% endblock %}
+
+

@@ -71,3 +71,5 @@ for i in range(len(foods)):
     print(contains_palm)
     print(ingredients)
     print(palm_ingredients)
+
+    # when there is a null as in with Chex and Kit Kat

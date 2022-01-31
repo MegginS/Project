@@ -1,75 +1,76 @@
 import requests
 import re
-import flask_app
 import data_model
 
-data_model.connect_to_db(flask_app.app)
 
-payload = {
-            'query': 'Chex',
-            'dataType': 'Branded',
-            'brandOwner': '',
-            'pageSize': '5',
-            'api_key': 'fJ2wh3xW6pxbmvirGjlwGhs2gwTaXedDlqxrXofR'
-            }
+def api_results(searched_item):
+    payload = {
+                'query': searched_item,
+                'dataType': 'Branded',
+                'brandOwner': '',
+                'pageSize': '5',
+                'api_key': 'fJ2wh3xW6pxbmvirGjlwGhs2gwTaXedDlqxrXofR'
+                }
 
-search = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search', params = payload)
-result = search.json()
+    search = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search', params = payload)
+    result = search.json()
 
-p = re.compile(r'([^,]*PALM[^,]*),')
+    p = re.compile(r'([^,]*PALM[^,]*),')
 
-foods = result['foods']
+    foods = result['foods']
 
-for i in range(len(foods)):
-    name = result['foods'][i].get('brandName')
-    descriptor = result['foods'][i].get('description')
-    fdc_id = result['foods'][i].get('fdcId')
-    brand = result['foods'][i].get('brandOwner')
-    ingredients_string = result['foods'][i].get('ingredients')
-    ingredients = ingredients_string.split(", ")
-    contains_palm = False
-    palm_ingredients = []
-    palm_names = p.findall(ingredients_string)
-    palm_list = data_model.PalmAlias.query.all()
+    for i in range(len(foods)):
+        name = result['foods'][i].get('brandName')
+        descriptor = result['foods'][i].get('description')
+        fdc_id = result['foods'][i].get('fdcId')
+        brand = result['foods'][i].get('brandOwner')
+        ingredients_string = result['foods'][i].get('ingredients')
+        ingredients = ingredients_string.split(", ")
+        contains_palm = False
+        palm_ingredients = []
+        palm_names = p.findall(ingredients_string)
+        palm_list = data_model.PalmAlias.query.all()
 
-    if palm_names != []:
-        contains_palm = True
-        for palm_name in palm_names:
-            palm_name = palm_name.strip(" ")
-            palm_ingredients.append(palm_name)
-    
-    for palm_alias in palm_list:
-        if palm_alias.alias_name in ingredients:
+        if palm_names != []:
             contains_palm = True
-            if palm_alias.alias_name not in palm_ingredients:
-                palm_ingredients.append(palm_alias.alias_name)
-    new_product = data_model.create_product(
-                  name,
-                  descriptor,
-                  contains_palm,
-                  fdc_id,
-                  ingredients,
-                  brand)
-    data_model.db.session.add(new_product)
-    data_model.db.session.commit()
-    if contains_palm is True:
-        for palm_ingredient in palm_ingredients:
-            alias = data_model.PalmAlias.query.filter(data_model.PalmAlias.alias_name == palm_ingredient).all()
-            if alias != []:
-                product_palm = data_model.create_product_with_palm(new_product.id, alias[0].id)
-            elif alias == []:
-                other_alias = data_model.PalmAlias.query.filter(data_model.PalmAlias.alias_name == "OTHER PALM OIL INGREDIENT").all()
-                product_palm = data_model.create_product_with_palm(new_product.id, other_alias[0].id)
-
-        data_model.db.session.add(product_palm)
+            for palm_name in palm_names:
+                palm_name = palm_name.strip(" ")
+                palm_ingredients.append(palm_name)
+        
+        for palm_alias in palm_list:
+            if palm_alias.alias_name in ingredients:
+                contains_palm = True
+                if palm_alias.alias_name not in palm_ingredients:
+                    palm_ingredients.append(palm_alias.alias_name)
+        new_product = data_model.create_product(
+                    name,
+                    descriptor,
+                    contains_palm,
+                    fdc_id,
+                    ingredients,
+                    brand)
+        data_model.db.session.add(new_product)
         data_model.db.session.commit()
+        if contains_palm is True:
+            for palm_ingredient in palm_ingredients:
+                alias = data_model.PalmAlias.query.filter(data_model.PalmAlias.alias_name == palm_ingredient).all()
+                if alias != []:
+                    product_palm = data_model.create_product_with_palm(new_product.id, alias[0].id)
+                elif alias == []:
+                    other_alias = data_model.PalmAlias.query.filter(data_model.PalmAlias.alias_name == "OTHER PALM OIL INGREDIENT").all()
+                    product_palm = data_model.create_product_with_palm(new_product.id, other_alias[0].id)
 
-    print(name)
-    print(descriptor)
-    print(fdc_id)
-    print(brand)
-    print(contains_palm)
-    print(ingredients)
-    print(palm_ingredients)
+            data_model.db.session.add(product_palm)
+            data_model.db.session.commit()
 
+    
+        print(name)
+        print(descriptor)
+        print(fdc_id)
+        print(brand)
+        print(contains_palm)
+        print(ingredients)
+        print(palm_ingredients)
+
+    return(name, descriptor, fdc_id, brand, contains_palm, ingredients, palm_ingredients)
     # when there is a null as in with Chex and Kit Kat

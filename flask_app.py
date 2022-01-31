@@ -3,6 +3,7 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 from data_model import connect_to_db
+import api_calls
 
 app = Flask(__name__)
 
@@ -20,6 +21,9 @@ def homepage():
 @app.route('/results')
 def results():
     """View/save results of a search"""
+
+    searched_item = request.args.get("searchedItem")
+    api_calls.api_results(searched_item)
 
     return render_template('results.html')
     
@@ -43,6 +47,5 @@ def deforestation_map():
     return render_template('map.html')
 
 if __name__ == "__main__":
-    # DebugToolbarExtension(app)
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)

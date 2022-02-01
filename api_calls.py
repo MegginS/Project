@@ -20,8 +20,8 @@ def api_results(searched_item):
     foods = result['foods']
 
     for i in range(len(foods)):
-        name = result['foods'][i].get('brandName')
-        descriptor = result['foods'][i].get('description')
+        name = result['foods'][i].get('brandName').title()
+        descriptor = result['foods'][i].get('description').title()
         fdc_id = result['foods'][i].get('fdcId')
         brand = result['foods'][i].get('brandOwner')
         ingredients_string = result['foods'][i].get('ingredients')
@@ -64,4 +64,4 @@ def api_results(searched_item):
             data_model.db.session.commit()
 
     
-        return {"name": name, "descriptor": descriptor, "fdc_id": fdc_id, "brand": brand, "contains_palm": contains_palm, "ingredients": ingredients, "palm_ingredients": palm_ingredients}
+        return {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand Owner": brand, "Contains Palm": contains_palm, "Ingredients": ingredients, "Palm Ingredients": palm_ingredients}

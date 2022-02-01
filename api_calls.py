@@ -18,10 +18,10 @@ def api_results(searched_item):
     p = re.compile(r'([^,]*PALM[^,]*),')
 
     foods = result['foods']
-
+    all_results = []
     for i in range(len(foods)):
-        name = result['foods'][i].get('brandName').title()
-        descriptor = result['foods'][i].get('description').title()
+        name = result['foods'][i].get('brandName')
+        descriptor = result['foods'][i].get('description')
         fdc_id = result['foods'][i].get('fdcId')
         brand = result['foods'][i].get('brandOwner')
         ingredients_string = result['foods'][i].get('ingredients')
@@ -62,6 +62,7 @@ def api_results(searched_item):
 
             data_model.db.session.add(product_palm)
             data_model.db.session.commit()
-
-    
-        return {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand Owner": brand, "Contains Palm": contains_palm, "Ingredients": ingredients, "Palm Ingredients": palm_ingredients}
+        a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand Owner": brand, "Contains Palm": contains_palm, "Ingredients": ingredients, "Palm Ingredients": palm_ingredients}
+        all_results.append(a_result)
+        # return {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand Owner": brand, "Contains Palm": contains_palm, "Ingredients": ingredients, "Palm Ingredients": palm_ingredients}
+    return all_results

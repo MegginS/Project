@@ -18,13 +18,52 @@
   <h1>Results</h1>
   
 <a>
-  {% for search_result, value in search_results.items() %}
-    <a> {{ search_result, value }}</a>
+  {% for productKey, productValue in product1.items() %}
+    <a> {{ productKey, productValue }}</a>
     <br>
   {% endfor %}
-
 </a>
-
+<br>
+<br>
+<a>
+  {% for productKey, productValue in product2.items() %}
+    <a> {{ productKey, productValue }}</a>
+    <br>
+  {% endfor %}
+</a>
+<br>
+<br>
+<a>
+  {% for productKey, productValue in product3.items() %}
+    <a> {{ productKey, productValue }}</a>
+    <br>
+  {% endfor %}
+</a>
+<br>
+<br>
+<a>
+  {% for productKey, productValue in product4.items() %}
+    <a> {{ productKey, productValue }}</a>
+    <br>
+  {% endfor %}
+</a>
+<br>
+<br>
+<a>
+  {{product5.Name}}
+  {% for productKey, productValue in product5.items() %}
+    <a> {{ productKey, productValue }}</a>
+    <br>
+  {% endfor %}
+  <br>
+  <br>
+  {% for result in search_results %}
+  <a> {{result.Name}}; {{result.Descriptor}}</a>
+  <br>
+  {% endfor %}
+</a>
+<br>
+<br>
 </body>
 </html>
 

@@ -1,7 +1,7 @@
 
 
 
-document.querySelector('ul').insertAdjacentHTML('beforeend', '<li> whatever you what to add</li>")')
+// document.querySelector('ul').insertAdjacentHTML('beforeend', '<li> whatever you what to add</li>")')
 
 const searchButton = document.querySelector('form');
 

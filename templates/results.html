@@ -1,12 +1,31 @@
 {% extends 'base.html' %}
-{% block title %}Palm Oil Home{% endblock %}
+{% block title %}Palm Oil Results{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
 
-  <h2></h2>
-  <ul>
+<!DOCTYPE html>
 
-  </ul>
+<html>
+<head>
+  <title> Palm Oil Results</title>
+  <!-- <link rel="stylesheet" href="static/style.css"> -->
+
+</head>
+
+
+<body>
+
+  <h1>Results</h1>
+  
+<a>
+  {% for search_result, value in search_results.items() %}
+    <a> {{ search_result, value }}</a>
+    <br>
+  {% endfor %}
+
+</a>
+
+</body>
+</html>
+
 {% endblock %}
-

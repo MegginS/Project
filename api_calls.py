@@ -64,13 +64,4 @@ def api_results(searched_item):
             data_model.db.session.commit()
 
     
-        print(name)
-        print(descriptor)
-        print(fdc_id)
-        print(brand)
-        print(contains_palm)
-        print(ingredients)
-        print(palm_ingredients)
-
-    return(name, descriptor, fdc_id, brand, contains_palm, ingredients, palm_ingredients)
-    # when there is a null as in with Chex and Kit Kat
+        return {"name": name, "descriptor": descriptor, "fdc_id": fdc_id, "brand": brand, "contains_palm": contains_palm, "ingredients": ingredients, "palm_ingredients": palm_ingredients}

@@ -23,9 +23,10 @@ def results():
     """View/save results of a search"""
 
     searched_item = request.args.get("searchedItem")
-    api_calls.api_results(searched_item)
+    search_results = api_calls.api_results(searched_item)
 
-    return render_template('results.html')
+
+    return render_template('results.html', search_results =search_results)
     
 @app.route('/profile')
 def profile():

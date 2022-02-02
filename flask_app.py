@@ -24,14 +24,8 @@ def results():
 
     searched_item = request.args.get("searchedItem")
     search_results = api_calls.api_results(searched_item)
-    print(len(search_results))
-    product1 = search_results[0]
-    product2 = search_results[1]
-    product3 = search_results[2]
-    product4 = search_results[3]
-    product5 = search_results[4]
 
-    return render_template('results.html', search_results = search_results, product1 = product1, product2 = product2, product3 = product3, product4 = product4, product5 = product5)
+    return render_template('results.html', search_results = search_results)
 
     # return render_template('results.html', search_results =search_results)
     

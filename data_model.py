@@ -27,7 +27,7 @@ def create_user(email, password, first_name, last_name):
                     password = password,
                     first_name = first_name,
                     last_name = last_name)
-                    
+
     return new_user
 
 
@@ -49,7 +49,7 @@ def create_saved_product(product_id, user_id):
     saved_product = UserProduct(
                     product_id = product_id,
                     user_id = user_id)
-                    
+                                    
     return saved_product
 
 

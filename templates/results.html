@@ -17,48 +17,24 @@
 
   <h1>Results</h1>
   
-<a>
-  {% for productKey, productValue in product1.items() %}
-    <a> {{ productKey, productValue }}</a>
-    <br>
-  {% endfor %}
-</a>
-<br>
-<br>
-<a>
-  {% for productKey, productValue in product2.items() %}
-    <a> {{ productKey, productValue }}</a>
-    <br>
-  {% endfor %}
-</a>
-<br>
-<br>
-<a>
-  {% for productKey, productValue in product3.items() %}
-    <a> {{ productKey, productValue }}</a>
-    <br>
-  {% endfor %}
-</a>
-<br>
-<br>
-<a>
-  {% for productKey, productValue in product4.items() %}
-    <a> {{ productKey, productValue }}</a>
-    <br>
-  {% endfor %}
-</a>
-<br>
-<br>
-<a>
-  {{product5.Name}}
-  {% for productKey, productValue in product5.items() %}
-    <a> {{ productKey, productValue }}</a>
-    <br>
-  {% endfor %}
-  <br>
   <br>
   {% for result in search_results %}
-  <a> {{result.Name}}; {{result.Descriptor}}</a>
+  <a> Product: {{result.Name}}: {{result.Descriptor}} </a>
+  <br>
+  <a> Brand Owner: {{result.Brand_owner}}</a>
+  <br>
+  <a> Fdc_id: {{result.Fdc_id}} </a>
+  <br>
+  <a> Contains Palm: {{result.Contains_palm}} {{result.Palm_ingredients}}
+    <br>
+    Palm Ingredient Description: {{result.Alias_description}}
+
+  </a>
+  <br> <br>
+  <a> All Ingredients: {{result.Ingredients}}</a>
+  <br>
+  <br>
+  <br>
   <br>
   {% endfor %}
 </a>

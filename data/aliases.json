@@ -65,7 +65,7 @@
     },
     {
       "alias_name": "VITAMIN A PALMITATE",
-      "description": "derived from palm oil"
+      "description": "Palmitate contains palmitic acid, the fatty acid found in palm oil. The palmitic acid is attached to the alcohol form of vitamin A to make VITAMIN A (PALMITATE)"
     },
     {
         "alias_name": "ASORBYL PALMITATE",
@@ -102,5 +102,9 @@
       {
         "alias_name": "OTHER PALM OIL INGREDIENT",
         "description": "derived from palm oil"
-    }
+    },
+    {
+      "alias_name": "VITAMIN A (PALMITATE)",
+      "description": "Palmitate contains palmitic acid, the fatty acid found in palm oil. The palmitic acid is attached to the alcohol form of vitamin A to make VITAMIN A (PALMITATE)"
+  }
 ]

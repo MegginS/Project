@@ -2,11 +2,56 @@
 {% block title %}Palm Oil Home{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
+<!DOCTYPE html>
 
-  <h2></h2>
-  <ul>
+<html>
+<head>
+  <title> Palm Oil News</title>
+  <!-- <link rel="stylesheet" href="static/style.css"> -->
 
-  </ul>
+</head>
+
+
+<body>
+
+  <h1>Palm Oil News</h1>
+
+
+  <a>Borneo is burning; How the world’s demand for palm oil is driving deforestation in Indonesia</a> 
+  <br>
+  <a>CNN Special Report</a>
+<br>
+
+  <a href= "https://edition.cnn.com/interactive/2019/11/asia/borneo-climate-bomb-intl-hnk/">
+    "https://edition.cnn.com/interactive/2019/11/asia/borneo-climate-bomb-intl-hnk/
+  </a>
+  <br>
+  <br>
+  <br>
+  {% for article in all_articles %}
+  <a>  {{article.news_source}}: {{article.Descriptor}} </a>
+  <br>
+  <a> {{article.title}} </a>
+  <br>
+  <a>  {{article.description}} 
+    <br>
+
+    <p><a href={{article.url}}>
+      <img src= {{article.urlimage}} width="500">
+      </a></p>
+    <br>
+    <a href= "something">
+      {{article.url}}
+    </a>
+  </a>
+  <br>
+  <br>
+  <br>
+  {% endfor %}
+</a>
+<br>
+<br>
+</body>
+</html>
+
 {% endblock %}
-

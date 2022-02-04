@@ -8,7 +8,7 @@ def api_results(searched_item):
                 'query': searched_item,
                 'dataType': 'Branded',
                 'brandOwner': '',
-                'pageSize': '1',
+                'pageSize': '5',
                 'api_key': 'fJ2wh3xW6pxbmvirGjlwGhs2gwTaXedDlqxrXofR'
                 }
 
@@ -19,6 +19,7 @@ def api_results(searched_item):
     p2 = re.compile(r'([^,]*PALM OIL[^,]*),')
 
     foods = result['foods']
+    
     all_results = []
     for i in range(len(foods)):
         name = result['foods'][i].get('brandName')

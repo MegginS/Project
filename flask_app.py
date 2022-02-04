@@ -3,7 +3,7 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 from data_model import connect_to_db
-import api_calls
+import api_calls, news_api
 
 app = Flask(__name__)
 
@@ -38,8 +38,10 @@ def profile():
 @app.route('/news')
 def news():
     """View links to news articles."""
+
+    all_articles = news_api.news_api_results()
     
-    return render_template('news.html')
+    return render_template('news.html', all_articles = all_articles)
 
 
 @app.route('/map')

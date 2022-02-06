@@ -79,7 +79,13 @@ def api_results(searched_item):
             data_model.db.session.add(product_palm)
             data_model.db.session.commit()
 
-        a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "Alias_description": alias_description}
+        if contains_palm is False:
+            palm_ingredients = ""
+            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients}
+        elif contains_palm is True:
+            palm_ingredients = set(palm_ingredients)
+            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "Alias_description": alias_description}
+        
         all_results.append(a_result)
         
     return all_results

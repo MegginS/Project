@@ -2,19 +2,20 @@
 
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
-from data_model import connect_to_db
+import data_model
 import api_calls, news_api
+import bcrypt
 
 app = Flask(__name__)
 
 
 # from jinja2 import StrictUndefined
-# app.secret_key = "dev"
+app.secret_key = "dev"
 # app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
-    """View homepage, search, and login."""
+    """View homepage, search."""
 
     return render_template('homepage.html')
 
@@ -27,13 +28,50 @@ def results():
 
     return render_template('results.html', search_results = search_results)
 
-    # return render_template('results.html', search_results =search_results)
-    
 @app.route('/profile')
-def profile():
-    """View profile"""
-    
-    return render_template('profile.html')
+def show_login():
+
+    return render_template('login.html')
+
+@app.route('/profile', methods = ['POST'])
+def handle_login():
+    """Log user into application."""
+
+    email = request.form["email"]
+    password = request.form["password"].encode("utf-8")
+
+    hashedpassword = b"SecretPassword55"
+    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+
+    if bcrypt.checkpw(hashedpassword, hashed):
+        return render_template('profile.html', email = email, password = password)
+    else:
+        return render_template('login.html')
+
+
+@app.route('/new_user')
+def show_new_user():
+
+    return render_template('new_user.html')
+
+@app.route('/new_user', methods = ['POST'])
+def add_new_user():
+    """Adding a New User"""
+
+    email = request.form["email"]
+    password = request.form["password"].encode("utf-8")
+    password_check = request.form["password2"].encode("utf-8")
+    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    first_name = request.form["first_name"]
+    last_name = request.form["last_name"]
+    print(password)
+    print(password_check)
+    print(email)
+    if password == password_check:
+        data_model.create_user(email = email, password = hashed, first_name = first_name, last_name = last_name)
+        return render_template('login.html')
+    else:
+        return render_template('new_user.html')
 
 @app.route('/news')
 def news():
@@ -51,5 +89,5 @@ def deforestation_map():
     return render_template('map.html')
 
 if __name__ == "__main__":
-    connect_to_db(app)
+    data_model.connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)

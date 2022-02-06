@@ -2,7 +2,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
-
 db = SQLAlchemy()
 
 
@@ -27,6 +26,9 @@ def create_user(email, password, first_name, last_name):
                     password = password,
                     first_name = first_name,
                     last_name = last_name)
+
+    db.session.add(new_user)
+    db.session.commit()
 
     return new_user
 

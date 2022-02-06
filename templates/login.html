@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<!DOCTYPE html>
+
+<html>
+
+<h2>Please Sign In</h2>
+  
+  <form action="/profile" method="POST">
+    <label>Username:</label>
+    <input type="text" name="email">
+    <br>
+    <label>Password:</label>
+    <input type="text" name="password">
+    <br>
+    <input type="submit">
+
+    <br>
+    <br>
+    <div class="container">
+      <span><a href="forgotten password">Forgot Password?</a></span>
+      <br>
+      <span>Don't have an account? <a href="new_user">Sign up</a></span>
+    </div>
+
+  </form>
+
+</body>
+</html>
+
+{% endblock %}

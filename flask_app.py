@@ -39,9 +39,16 @@ def handle_login():
 
     email = request.form["email"]
     password = request.form["password"].encode("utf-8")
-
-    hashedpassword = b"SecretPassword55"
     hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    
+    check_email = data_model.User.query.filter(data_model.User.email == email).all()
+    hashedpassword = b"check_email[0].password"
+
+    print(check_email[0])
+    print(hashedpassword)
+
+    # hashedpassword = b"SecretPassword55"
+
 
     if bcrypt.checkpw(hashedpassword, hashed):
         return render_template('profile.html', email = email, password = password)
@@ -64,13 +71,12 @@ def add_new_user():
     hashed = bcrypt.hashpw(password, bcrypt.gensalt())
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
-    print(password)
-    print(password_check)
-    print(email)
+
     if password == password_check:
         data_model.create_user(email = email, password = hashed, first_name = first_name, last_name = last_name)
         return render_template('login.html')
     else:
+        # flash message
         return render_template('new_user.html')
 
 @app.route('/news')

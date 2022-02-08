@@ -1,7 +1,7 @@
 import requests
 import re
 import data_model
-
+from api_functions import check_for_palm
 
 def api_results(searched_item):
     payload = {
@@ -38,43 +38,30 @@ def api_results(searched_item):
         ingredients_string = result['foods'][i].get('ingredients').upper()
         ingredients = ingredients_string.split(", ")
         alias_description = ""
-        contains_palm = False
         # need to make none for all items- ingredients and change boolean for comtains palm- yes, no -possibly
         palm_ingredients = []
         palm_names = p.findall(ingredients_string)
         palm_list = data_model.PalmAlias.query.all()
+        contains_palm = check_for_palm(palm_names, palm_ingredients, palm_list, ingredients)
 
-        if palm_names != []:
-            contains_palm = True
-            for palm_name in palm_names:
-                palm_name = palm_name.strip(" ")
-                palm_ingredients.append(palm_name)
-        
-        for palm_alias in palm_list:
-            if palm_alias.alias_name in ingredients:
-                contains_palm = True
-                if palm_alias.alias_name not in palm_ingredients:
-                    palm_ingredients.append(palm_alias.alias_name)
-        new_product = data_model.create_product(
-                    name,
-                    descriptor,
-                    contains_palm,
-                    fdc_id,
-                    ingredients,
-                    brand)
+        new_product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
         data_model.db.session.add(new_product)
         data_model.db.session.commit()
+
         if contains_palm is True:
             for palm_ingredient in palm_ingredients:
                 alias = data_model.PalmAlias.query.filter(
                     data_model.PalmAlias.alias_name == palm_ingredient).all()
+                alias_description = []
                 if alias != []:
-                    product_palm = data_model.create_product_with_palm(new_product.id, alias[0].id)
-                    alias_description = alias[0].description
+                    for an_alias in alias:
+                        product_palm = data_model.create_product_with_palm(new_product.id, an_alias.id)
+                        # alias_description.append(an_alias.description)
                 elif alias == []:
                     other_alias = data_model.PalmAlias.query.filter(
                         data_model.PalmAlias.alias_name == "OTHER PALM OIL INGREDIENT").all()
                     product_palm = data_model.create_product_with_palm(new_product.id, other_alias[0].id)
+                    # alias_description.append(other_alias[0].description)
                 
             data_model.db.session.add(product_palm)
             data_model.db.session.commit()

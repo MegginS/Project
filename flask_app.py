@@ -53,6 +53,11 @@ def show_new_user():
 
     return render_template('new_user.html')
 
+@app.route('/forgot_password')
+def forgot_password():
+
+    return render_template('forgot_password.html')    
+
 @app.route('/new_user', methods = ['POST'])
 def add_new_user():
     """Adding a New User"""

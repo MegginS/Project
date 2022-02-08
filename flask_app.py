@@ -38,22 +38,14 @@ def handle_login():
     """Log user into application."""
 
     email = request.form["email"]
-    password = request.form["password"].encode("utf-8")
-    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-    
-    check_email = data_model.User.query.filter(data_model.User.email == email).all()
-    hashedpassword = b"check_email[0].password"
+    password = bytes(request.form["password"], "utf-8")
+    user = data_model.User.query.filter(data_model.User.email == email).all()
 
-    print(check_email[0])
-    print(hashedpassword)
-
-    # hashedpassword = b"SecretPassword55"
-
-
-    if bcrypt.checkpw(hashedpassword, hashed):
-        return render_template('profile.html', email = email, password = password)
-    else:
-        return render_template('login.html')
+    if len(user) > 0:
+        hashedpassword = bytes(user[0].password, "utf-8")
+        if bcrypt.checkpw(password, hashedpassword):
+            return render_template('profile.html', email = email, password = password)
+    return render_template('login.html')
 
 
 @app.route('/new_user')
@@ -68,11 +60,11 @@ def add_new_user():
     email = request.form["email"]
     password = request.form["password"].encode("utf-8")
     password_check = request.form["password2"].encode("utf-8")
-    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
 
     if password == password_check:
+        hashed = bcrypt.hashpw(password, bcrypt.gensalt()).decode("utf-8")
         data_model.create_user(email = email, password = hashed, first_name = first_name, last_name = last_name)
         return render_template('login.html')
     else:

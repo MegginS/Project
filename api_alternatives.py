@@ -3,9 +3,10 @@ import re
 import data_model
 from api_functions import check_for_palm, create_palm_products
 
-def api_results(searched_item):
+def api_alternatives(branded_food_category):
     payload = {
-                'query': searched_item,
+                'query': "Processed Cereal Product",
+                'ingredients':  "-palm",
                 'dataType': 'Branded',
                 'pageSize': '5',
                 'api_key': 'fJ2wh3xW6pxbmvirGjlwGhs2gwTaXedDlqxrXofR'
@@ -17,7 +18,7 @@ def api_results(searched_item):
     p = re.compile(r'([^,]*PALM[^,]*),')
 
     foods = result['foods']
-    all_results = []
+    all_alternatives = []
 
     for i in range(len(foods)):
 
@@ -52,14 +53,12 @@ def api_results(searched_item):
 
         if contains_palm is False:
             palm_ingredients = ""
-            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients}
+            alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients}
+            all_alternatives.append(alt_result)
         elif contains_palm is True:
             alias_description = create_palm_products(palm_ingredients, new_product)
-            palm_ingredients = set(palm_ingredients)
-            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "Alias_description": alias_description}
         
-        all_results.append(a_result)
-        
-    return all_results
+        all_alternatives.append(alt_result)
+    print(all_alternatives)
+    return all_alternatives
 
- # ingredients and change boolean for comtains palm- yes, no -possibly

@@ -15,14 +15,12 @@
 
 <body>
 
-  <h1>Results</h1>
+  <h1>Alternatives</h1>
 
   <br>
-  {% for result in search_results %}
+  {% for result in all_alternatives %}
   <a> Product: {{result.Name}}: {{result.Descriptor}}</a> 
-    <br>
-    <form action="/alternatives">
-    <input type="submit" value="Palm Free Alternatives">
+
   <br>
   <a> Brand Owner: {{result.Brand_owner}}</a>
   <br>

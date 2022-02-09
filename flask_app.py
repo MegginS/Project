@@ -3,7 +3,7 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 import data_model
-import api_calls, news_api
+import api_calls, news_api, api_alternatives
 import bcrypt
 
 app = Flask(__name__)
@@ -27,6 +27,13 @@ def results():
     search_results = api_calls.api_results(searched_item)
 
     return render_template('results.html', search_results = search_results)
+
+@app.route('/alternatives')
+def show_alternatives():
+    
+    all_alternatives = api_alternatives.api_alternatives("Processed Cereal Product")
+
+    return render_template('alternatives.html', all_alternatives = all_alternatives)
 
 @app.route('/profile')
 def show_login():

@@ -31,7 +31,9 @@ def results():
 @app.route('/alternatives')
 def show_alternatives():
     
-    all_alternatives = api_alternatives.api_alternatives("Processed Cereal Product")
+    branded_food_category = "yogurt"
+    print(branded_food_category)
+    all_alternatives = api_alternatives.api_alternatives(branded_food_category)
 
     return render_template('alternatives.html', all_alternatives = all_alternatives)
 

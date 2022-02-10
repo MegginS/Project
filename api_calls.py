@@ -38,6 +38,8 @@ def api_results(searched_item):
             brand = ""
         brand = brand.title()
 
+        branded_food_category = result['foods'][i].get('foodCategory')
+
         ingredients_string = result['foods'][i].get('ingredients').upper()
         ingredients = ingredients_string.split(", ")
         
@@ -56,7 +58,7 @@ def api_results(searched_item):
         elif contains_palm is True:
             alias_description = create_palm_products(palm_ingredients, new_product)
             palm_ingredients = set(palm_ingredients)
-            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "Alias_description": alias_description}
+            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "Alias_description": alias_description, "branded_food_category": branded_food_category}
         
         all_results.append(a_result)
         

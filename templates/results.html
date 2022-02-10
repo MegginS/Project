@@ -20,9 +20,6 @@
   <br>
   {% for result in search_results %}
   <a> Product: {{result.Name}}: {{result.Descriptor}}</a> 
-    <br>
-    <form action="/alternatives">
-    <input type="submit" value="Palm Free Alternatives">
   <br>
   <a> Brand Owner: {{result.Brand_owner}}</a>
   <br>
@@ -31,7 +28,11 @@
   <a> Contains Palm: {{result.Contains_palm}} {{result.Palm_ingredients}}
   <br>
   <a> Relation to palm {{result.Alias_description}}</a>
-
+  <br>
+  <a> Branded Food Category: {{result.branded_food_category}}</a>
+  <br>
+  <form action="/alternatives">
+  <input type="submit" name = {{result.branded_food_category}} value="Palm Free Alternatives">
   </a>
   <br> <br>
   <a> All Ingredients: {{result.Ingredients}}</a>

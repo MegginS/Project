@@ -39,4 +39,4 @@ def create_palm_products(palm_ingredients, new_product):
         alias_description.append(product_palm.palm_aliases.description)
 
     return set(alias_description)
-        
+

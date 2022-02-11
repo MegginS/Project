@@ -19,7 +19,8 @@
 
   <br>
   {% for result in search_results %}
-  <a> Product: {{result.Name}}: {{result.Descriptor}}</a> 
+  <a> 
+    Product: {{result.Name}}: {{result.Descriptor}}</a> 
   <br>
   <a> Brand Owner: {{result.Brand_owner}}</a>
   <br>
@@ -29,12 +30,18 @@
   <br>
   <a> Relation to palm {{result.Alias_description}}</a>
   <br>
-  <a> Branded Food Category: {{result.branded_food_category}}</a>
-  <br>
-  <form action="/alternatives">
-  <input type="submit" name = {{result.branded_food_category}} value="Palm Free Alternatives">
-  </a>
-  <br> <br>
+
+
+  {% if result.Contains_palm == True %}
+    <a> Branded Food Category: {{result.branded_food_category}}</a>
+    <br>
+    <form action="/alternatives">
+      <button type="submit" name="alternative" value="{{result.branded_food_category}}">Palm Free Alternatives</button>
+      </a>
+      <br>
+    </form>
+    {% endif %}
+    <br>
   <a> All Ingredients: {{result.Ingredients}}</a>
   <br>
   <br>

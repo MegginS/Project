@@ -31,7 +31,8 @@ def results():
 @app.route('/alternatives')
 def show_alternatives():
     
-    all_alternatives = api_alternatives.api_alternatives()
+    food_category = request.args.get("alternative")
+    all_alternatives = api_alternatives.api_alternatives(food_category)
 
     return render_template('alternatives.html', all_alternatives = all_alternatives)
 

@@ -4,18 +4,13 @@ import data_model
 from api_functions import check_for_palm, create_palm_products
 import json
 
-def api_alternatives():
+def api_alternatives(food_category):
     payload = {"includeDataTypes":
                 {"Branded": True},
                 "referenceFoodsCheckBox": True,
                 "requireAllWords": True,
-                # "sortCriteria":{"sortColumn":"description","sortDirection":"asc"},
-                "pageSize": 100,
-                # "exactBrandOwner": None,
-                # "currentPage":1,
-                "generalSearchInput":"Processed Cereal Products",
-                # "includeMarketCountries":{"United States": True,"Canada":True,"New Zealand": True},
-                # "sortField":"",
+                "pageSize": 10,
+                "generalSearchInput": food_category,
                 "sortDirection": None}
 
     payload = json.dumps(payload)
@@ -26,7 +21,7 @@ def api_alternatives():
     p = re.compile(r'([^,]*PALM[^,]*),')
 
     foods = result['foods']
-    print(foods)
+
     all_alternatives = []
 
     for i in range(len(foods)):
@@ -64,10 +59,10 @@ def api_alternatives():
         if contains_palm is False:
             palm_ingredients = ""
             alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients}
-            print(alt_result)
+
             all_alternatives.append(alt_result)
         elif contains_palm is True:
-            alias_description = create_palm_products(palm_ingredients, new_product)
-        print(name)
+            create_palm_products(palm_ingredients, new_product)
+
 
     return all_alternatives

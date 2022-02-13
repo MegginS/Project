@@ -1,12 +1,38 @@
 {% extends 'base.html' %}
-{% block title %}Palm Oil Home{% endblock %}
+{% block title %} Your Name {% endblock %}
 
 {% block body %}
-  <h1>Your Profile</h1>
 
-  <h2></h2>
-  <ul>
+<!DOCTYPE html>
 
-  </ul>
+<html>
+<head>
+  <title> Your Profile</title>
+  <!-- <link rel="stylesheet" href="static/style.css"> -->
+</head>
+
+<body>
+
+  <h1>Saved Products</h1>
+
+  <br>
+  {% for favorite in favorites %}
+  <a> 
+    Product: {{favorite.name}}: {{favorite.descriptor}}</a> 
+  <br>
+  <a> Brand Owner: {{favorite.brand}}</a>
+  <br>
+  <a> Fdc_id: {{favorite.fdc_id}} </a>
+  <br>
+  <br>
+  <a> All Ingredients: {{favorite.ingredients}}</a>
+  <br>
+  <br>
+  {% endfor %}
+</a>
+<br>
+<br>
+</body>
+</html>
+
 {% endblock %}
-

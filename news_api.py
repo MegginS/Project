@@ -6,7 +6,7 @@ import re
 def news_api_results():
     news_payload = {
                 'q': 'palm oil destruction',
-                'from': '2022-01-15',
+                'from': '2022-02-01',
                 'apiKey': '7873c5eaa73d4b5d935a47b3422c93ca',
                 'sortBy': 'relevancy',
                 'pageSize': '30'

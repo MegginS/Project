@@ -55,7 +55,10 @@ def create_saved_product(product_id, user_id):
     saved_product = UserProduct(
                     product_id = product_id,
                     user_id = user_id)
-                                    
+
+    db.session.add(saved_product)
+    db.session.commit()
+
     return saved_product
 
 

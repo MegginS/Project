@@ -32,18 +32,29 @@ def results():
 def show_alternatives():
     
     email = session.get('email')
+    if email is None:
+        flash("Login to save palm alternatives")
 
-    if email:
-        food_category = request.args.get("alternative")
-        all_alternatives = api_alternatives.api_alternatives(food_category)
-        return render_template('alternatives.html', all_alternatives = all_alternatives, email = email)
-    else:
-        flash("You must log in to save alternatives")
-        return render_template('login.html')
+    food_category = request.args.get("alternative")
+    all_alternatives = api_alternatives.api_alternatives(food_category)
+    return render_template('alternatives.html', all_alternatives = all_alternatives, email = email)
 
 @app.route('/profile')
 def show_login():
 
+    email = session.get('email')
+    if email is not None:
+        current_user = data_model.User.query.filter(data_model.User.email == email).first().id
+        # user_favorites = data_model.Product.query.filter(data_model.Product.user_products.user_id == current_user).all()
+        user_favorites = data_model.UserProduct.query.filter(data_model.UserProduct.user_id == current_user).all()
+        
+        favorites = []
+        for favorite in user_favorites:
+            product_info = data_model.Product.query.filter(data_model.Product.id == favorite.product_id).first()
+            favorites.append(product_info)
+            
+        return render_template('profile.html', email = email, favorites = favorites)
+   
     return render_template('login.html')
 
 @app.route('/profile', methods = ['POST'])
@@ -53,13 +64,12 @@ def handle_login():
     email = request.form["email"]
     password = bytes(request.form["password"], "utf-8")
     user = data_model.User.query.filter(data_model.User.email == email).all()
-    
 
     if len(user) > 0:
         hashedpassword = bytes(user[0].password, "utf-8")
         if bcrypt.checkpw(password, hashedpassword):
             session['email'] = email
-            return render_template('profile.html', email = email, password = password)
+            return render_template('profile.html', email = email)
     return render_template('login.html')
 
 

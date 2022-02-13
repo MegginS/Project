@@ -7,7 +7,7 @@ def api_results(searched_item):
     payload = {
                 'query': searched_item,
                 'dataType': 'Branded',
-                'pageSize': '5',
+                'pageSize': '1',
                 'api_key': 'fJ2wh3xW6pxbmvirGjlwGhs2gwTaXedDlqxrXofR'
                 }
 

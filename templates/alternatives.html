@@ -19,8 +19,19 @@
 
   <br>
   {% for result in all_alternatives %}
-  <a> Product: {{result.Name}}: {{result.Descriptor}}</a> 
-
+  <a> Product: {{result.Name}}: {{result.Descriptor}} </a> 
+    
+    {% if email  %}
+    <br>
+    <form action="/alternatives">
+      <button type="submit" name="saveAlternative" value="{{session['email']}}">Save Alternative</button>
+      </a>
+      <br>
+      {% else %}
+      <form action="/alternatives">
+        <button type="submit" name="dontsaveAlternative" >Login to Save Alternative</button>
+    </form>
+    {% endif %}
   <br>
   <a> Brand Owner: {{result.Brand_owner}}</a>
   <br>

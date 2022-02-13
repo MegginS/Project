@@ -1,23 +1,23 @@
 """Server for palm oil app"""
 
 from flask import (Flask, render_template, request, flash, session,
-                   redirect)
+                   redirect, make_response)
 import data_model
 import api_calls, news_api, api_alternatives
 import bcrypt
 
 app = Flask(__name__)
 
-
-# from jinja2 import StrictUndefined
-app.secret_key = "dev"
-# app.jinja_env.undefined = StrictUndefined
+from jinja2 import StrictUndefined
+app.secret_key = "secret"
+app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
     """View homepage, search."""
 
     return render_template('homepage.html')
+
 
 @app.route('/results')
 def results():
@@ -31,10 +31,15 @@ def results():
 @app.route('/alternatives')
 def show_alternatives():
     
-    food_category = request.args.get("alternative")
-    all_alternatives = api_alternatives.api_alternatives(food_category)
+    email = session.get('email')
 
-    return render_template('alternatives.html', all_alternatives = all_alternatives)
+    if email:
+        food_category = request.args.get("alternative")
+        all_alternatives = api_alternatives.api_alternatives(food_category)
+        return render_template('alternatives.html', all_alternatives = all_alternatives, email = email)
+    else:
+        flash("You must log in to save alternatives")
+        return render_template('login.html')
 
 @app.route('/profile')
 def show_login():
@@ -48,10 +53,12 @@ def handle_login():
     email = request.form["email"]
     password = bytes(request.form["password"], "utf-8")
     user = data_model.User.query.filter(data_model.User.email == email).all()
+    
 
     if len(user) > 0:
         hashedpassword = bytes(user[0].password, "utf-8")
         if bcrypt.checkpw(password, hashedpassword):
+            session['email'] = email
             return render_template('profile.html', email = email, password = password)
     return render_template('login.html')
 
@@ -76,13 +83,19 @@ def add_new_user():
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
 
-    if password == password_check:
-        hashed = bcrypt.hashpw(password, bcrypt.gensalt()).decode("utf-8")
-        data_model.create_user(email = email, password = hashed, first_name = first_name, last_name = last_name)
-        return render_template('login.html')
-    else:
-        # flash message
+    user = data_model.get_user_by_email(email)
+
+    if user:
+        flash("An account is already associated with this email")
         return render_template('new_user.html')
+    else:
+        if password == password_check:
+            hashed = bcrypt.hashpw(password, bcrypt.gensalt()).decode("utf-8")
+            data_model.create_user(email = email, password = hashed, first_name = first_name, last_name = last_name)
+            return render_template('login.html')
+        else:
+            flash("Username and Password do not match")
+            return render_template('new_user.html')
 
 @app.route('/news')
 def news():
@@ -98,6 +111,8 @@ def deforestation_map():
     """View map of rainforest deforestation from Palm Oil"""
     
     return render_template('map.html')
+
+
 
 if __name__ == "__main__":
     data_model.connect_to_db(app)

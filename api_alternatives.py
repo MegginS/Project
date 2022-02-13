@@ -9,7 +9,7 @@ def api_alternatives(food_category):
                 {"Branded": True},
                 "referenceFoodsCheckBox": True,
                 "requireAllWords": True,
-                "pageSize": 10,
+                "pageSize": 1,
                 "generalSearchInput": food_category,
                 "sortDirection": None}
 

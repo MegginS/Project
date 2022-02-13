@@ -25,7 +25,16 @@
       padding: 10px 16px;
       text-decoration: none;
     }
-    
+
+    li b {
+      display: block;
+      color: red;
+      text-align: right;
+      padding: 10px 64px;
+      text-decoration: none;
+      
+    }
+
     li a:hover {
       background-color: rgb(8, 40, 8);
     }
@@ -38,6 +47,7 @@
       padding: 1%;
     }
 
+
     </style>
 
     </head>
@@ -45,14 +55,25 @@
     <body>
     
       <h1>Unearth Palm</h1>
+
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/profile">Profile</a></li>
         <li><a href="/news">Palm Oil News</a></li>
         <li><a href="/map">Map</a></li>
+
+        {% for message in get_flashed_messages() %}
+        <li><b>{{ message }}</b></li>
+        {% endfor %}
+
       </ul>
-    
+
       <div class="container">
+
+      
+
+        
+
         <!-- This is where the main content goes. -->
         {% block body %}
             BODY OF PAGE GOES HERE VIA INHERITANCE

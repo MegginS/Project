@@ -32,6 +32,10 @@ def create_user(email, password, first_name, last_name):
 
     return new_user
 
+def get_user_by_email(email):
+    """Return a user by email."""
+
+    return User.query.filter(User.email == email).first()
 
 class UserProduct(db.Model):
     """A product saved by a user."""

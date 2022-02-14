@@ -46,11 +46,14 @@ def show_alternatives():
 def save_alternative():
 
     ids = request.json.get("ids")
-# query for a user with that email - get id
-# pass product and get product id
-# create user with product
+    ids_list = ids.split(",")
+    user_id = ids_list[0]
+    product_id = ids_list[1]
 
-    print(ids)
+    print(user_id)
+    print(product_id)
+    data_model.create_saved_product(product_id, user_id)
+
     return {}
 # should return "added"
 

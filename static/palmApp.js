@@ -1,16 +1,18 @@
+document.getElementById("save-product").addEventListener("click", evt => {
+    evt.preventDefault();
 
+    const input = {
+      ids: document.getElementById('save-product').value,
+    };
 
-
-
-// const foodCategory = document.querySelector('form');
-
-// foodCategory.addEventListener('submit', (evt) =>{
-//   const searchInput = document.querySelector('input[name="searchedItem"]');
-
-//   if (searchInput.value.length < 2) {
-//     evt.preventDefault();
-//   }
-// }
-// );
-
+    fetch('/saving-products', {
+      method: 'POST',
+      body: JSON.stringify(input),
+      headers: {
+      'Content-Type': 'application/json',
+    },
+    })
+      .then(response => {}
+      );
+  });
 

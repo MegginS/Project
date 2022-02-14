@@ -9,7 +9,6 @@
 <head>
   <title> Palm Oil Results</title>
   <!-- <link rel="stylesheet" href="static/style.css"> -->
-
 </head>
 
 
@@ -23,21 +22,20 @@
     
     {% if email  %}
     <br>
-    <form action="/alternatives">
-      <button type="submit" name="saveAlternative" value="{{session['email']}}">Save Alternative</button>
+    
+      <button id="save-product" type="submit" name="saveAlternative" value="{{user_id}},{{result.product_id}}">Save Alternative</button>
       </a>
       <br>
       {% else %}
       <form action="/alternatives">
         <button disabled type="submit" name="dontsaveAlternative" >Save Alternative</button>
-    </form>
+      </form>
     {% endif %}
   <br>
   <a> Brand Owner: {{result.Brand_owner}}</a>
   <br>
   <a> Fdc_id: {{result.Fdc_id}} </a>
   <br>
-
   </a>
   <br> 
   <a> All Ingredients: {{result.Ingredients}}</a>
@@ -49,6 +47,11 @@
 <br>
 <br>
 </body>
+<!-- This works here -->
+<!-- Your script is loaded and executed before your DOM has been created / initialized -->
+<!-- When your script runs the first time (when you load it at the top of the HTML code), it cannot find the element by ID -->
+<!-- In the console, you'll see that the code that I added to log what the value of the button is is null the first time, but not-null the 2nd time -->
+<script src="/static/palmApp.js"></script>
 </html>
 
 {% endblock %}

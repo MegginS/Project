@@ -32,12 +32,28 @@ def results():
 def show_alternatives():
     
     email = session.get('email')
+    
     if email is None:
         flash("Login to save palm alternatives")
 
     food_category = request.args.get("alternative")
     all_alternatives = api_alternatives.api_alternatives(food_category)
-    return render_template('alternatives.html', all_alternatives = all_alternatives, email = email)
+    user_id = data_model.User.query.filter(data_model.User.email == email).first().id
+
+    return render_template('alternatives.html', all_alternatives = all_alternatives, email = email, user_id = user_id)
+
+@app.route("/saving-products", methods = ["POST"])
+def save_alternative():
+
+    ids = request.json.get("ids")
+# query for a user with that email - get id
+# pass product and get product id
+# create user with product
+
+    print(ids)
+    return {}
+# should return "added"
+
 
 @app.route('/profile')
 def show_login():

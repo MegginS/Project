@@ -58,7 +58,7 @@ def api_alternatives(food_category):
 
         if contains_palm is False:
             palm_ingredients = ""
-            alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients}
+            alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": new_product.id}
 
             all_alternatives.append(alt_result)
         elif contains_palm is True:

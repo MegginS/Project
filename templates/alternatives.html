@@ -20,7 +20,7 @@
   {% for result in all_alternatives %}
   <a> Product: {{result.Name}}: {{result.Descriptor}} </a> 
     
-    {% if email  %}
+    {% if email %}
     <br>
     
       <button id="save-product" type="submit" name="saveAlternative" value="{{user_id}},{{result.product_id}}">Save Alternative</button>

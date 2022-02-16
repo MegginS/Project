@@ -16,6 +16,7 @@
   <h1>Saved Products</h1>
 
   <br>
+  {% if favorites != [] %}
   {% for favorite in favorites %}
   <a> 
     Product: {{favorite.name}}: {{favorite.descriptor}}</a> 
@@ -29,6 +30,7 @@
   <br>
   <br>
   {% endfor %}
+  {% endif %}
 </a>
 <br>
 <br>

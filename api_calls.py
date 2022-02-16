@@ -39,6 +39,8 @@ def api_results(searched_item):
         brand = brand.title()
 
         branded_food_category = result['foods'][i].get('foodCategory')
+        if branded_food_category is None:
+            branded_food_catergory = ""
 
         ingredients_string = result['foods'][i].get('ingredients').upper()
         ingredients = ingredients_string.split(", ")

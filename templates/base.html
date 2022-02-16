@@ -62,6 +62,10 @@
         <li><a href="/news">Palm Oil News</a></li>
         <li><a href="/map">Map</a></li>
 
+        {% if email %}
+        <li><a href="/logout">Logout</a></li>
+        {% endif %}
+
         {% for message in get_flashed_messages() %}
         <li><b>{{ message }}</b></li>
         {% endfor %}

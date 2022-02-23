@@ -5,11 +5,17 @@ from api_functions import check_for_palm, create_palm_products
 import json
 
 def api_alternatives(food_category):
+
+    # if food_category == "Cereal" or food_category =="Processed Cereal Products":
+    #     palm_ingredients = ""
+    #     alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": new_product.id}
+        
+
     payload = {"includeDataTypes":
                 {"Branded": True},
                 "referenceFoodsCheckBox": True,
                 "requireAllWords": True,
-                "pageSize": 10,
+                "pageSize": 1,
                 "generalSearchInput": food_category,
                 "sortDirection": None}
 

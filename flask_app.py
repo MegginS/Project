@@ -28,7 +28,7 @@ def results():
 
     searched_item = request.args.get("searchedItem")
     search_results = api_calls.api_results(searched_item)
-
+    
     return render_template('results.html', search_results = search_results, email = email)
 
 @app.route('/alternatives')
@@ -50,19 +50,32 @@ def show_alternatives():
     # user_id = data_model.User.query.filter(data_model.User.email == email).first().id
 
 
-@app.route("/saving-products", methods = ["POST"])
-def save_alternative():
+# @app.route("/saving-products", methods = ["POST"])
+# def save_alternative():
 
-    ids = request.json.get("ids")
-    ids_list = ids.split(",")
-    user_id = ids_list[0]
-    product_id = ids_list[1]
+#     ids = request.json.get("ids")
+#     ids_list = ids.split(",")
+#     user_id = ids_list[0]
+#     product_id = ids_list[1]
 
-    data_model.create_saved_product(product_id, user_id)
+#     data_model.create_saved_product(product_id, user_id)
 
-    return {}
+#     return {}
 # should return "added"
 
+@app.route("/saving-product", methods = ["POST"])
+def save_alt():
+    
+    email = session.get('email')
+
+    product_id = request.json.get("productId")
+    user_id = data_model.User.query.filter(data_model.User.email == email).first().id
+    print(product_id)
+    print(user_id)
+    print("***********************")
+
+    data_model.create_saved_product(product_id, user_id)
+    return "success"
 
 @app.route('/profile')
 def show_login():

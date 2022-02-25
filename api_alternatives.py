@@ -57,18 +57,33 @@ def api_alternatives(food_category):
         palm_names = p.findall(ingredients_string)
         palm_list = data_model.PalmAlias.query.all()
         contains_palm = check_for_palm(palm_names, palm_ingredients, palm_list, ingredients)
+        product = data_model.Product.query.filter(data_model.Product.fdc_id == fdc_id).first()
+        
+        if product is None:
+            new_product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
+            data_model.db.session.add(new_product)
+            data_model.db.session.commit()
+            if contains_palm is False:
+                palm_ingredients = ""
+                alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": new_product.id}
+                all_alternatives.append(alt_result)
+        else:
+            if contains_palm is False:
+                palm_ingredients = ""
+                alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}
+                all_alternatives.append(alt_result)
 
-        new_product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
-        data_model.db.session.add(new_product)
-        data_model.db.session.commit()
+        # new_product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
+        # data_model.db.session.add(new_product)
+        # data_model.db.session.commit()
 
-        if contains_palm is False:
-            palm_ingredients = ""
-            alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": new_product.id}
+        # if contains_palm is False:
+        #     palm_ingredients = ""
+        #     alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": new_product.id}
 
-            all_alternatives.append(alt_result)
-        elif contains_palm is True:
-            create_palm_products(palm_ingredients, new_product)
+        #     all_alternatives.append(alt_result)
+        # elif contains_palm is True:
+        #     create_palm_products(palm_ingredients, new_product)
 
 
     return all_alternatives

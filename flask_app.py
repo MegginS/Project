@@ -91,6 +91,10 @@ def handle_login():
             session['email'] = email
             favorites = functions.load_favorites(email)
             return render_template('profile.html', email = email, favorites = favorites)
+        else:
+            flash("Invalid Password")
+            return render_template('login.html', email = None)
+
     else:
         return render_template('login.html', email = email)
 
@@ -128,7 +132,7 @@ def add_new_user():
 
     if user:
         flash("An account is already associated with this email")
-        return render_template('new_user.html', email = email)
+        return render_template('new_user.html', email = None)
     else:
         if password == password_check:
             hashed = bcrypt.hashpw(password, bcrypt.gensalt()).decode("utf-8")
@@ -136,7 +140,7 @@ def add_new_user():
             return render_template('login.html', email = email)
         else:
             flash("Username and Password do not match")
-            return render_template('new_user.html', email = email)
+            return render_template('new_user.html', email = None)
 
 @app.route('/news')
 def news():

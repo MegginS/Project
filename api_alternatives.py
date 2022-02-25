@@ -15,7 +15,7 @@ def api_alternatives(food_category):
                 {"Branded": True},
                 "referenceFoodsCheckBox": True,
                 "requireAllWords": True,
-                "pageSize": 1,
+                "pageSize": 10,
                 "generalSearchInput": food_category,
                 "sortDirection": None}
 

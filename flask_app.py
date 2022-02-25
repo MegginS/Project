@@ -29,6 +29,10 @@ def results():
     searched_item = request.args.get("searchedItem")
     search_results = api_calls.api_results(searched_item)
     
+    if email is None:
+        user_id = None
+        flash("Login to save products")
+
     return render_template('results.html', search_results = search_results, email = email)
 
 @app.route('/alternatives')
@@ -47,21 +51,6 @@ def show_alternatives():
         
     return render_template('alternatives.html', all_alternatives = all_alternatives, email = email, user_id = user_id)
 
-    # user_id = data_model.User.query.filter(data_model.User.email == email).first().id
-
-
-# @app.route("/saving-products", methods = ["POST"])
-# def save_alternative():
-
-#     ids = request.json.get("ids")
-#     ids_list = ids.split(",")
-#     user_id = ids_list[0]
-#     product_id = ids_list[1]
-
-#     data_model.create_saved_product(product_id, user_id)
-
-#     return {}
-# should return "added"
 
 @app.route("/saving-product", methods = ["POST"])
 def save_alt():

@@ -7,7 +7,7 @@ def api_results(searched_item):
     payload = {
                 'query': searched_item,
                 'dataType': 'Branded',
-                'pageSize': '5',
+                'pageSize': '3',
                 'api_key': 'fJ2wh3xW6pxbmvirGjlwGhs2gwTaXedDlqxrXofR'
                 }
 
@@ -49,19 +49,28 @@ def api_results(searched_item):
         palm_names = p.findall(ingredients_string)
         palm_list = data_model.PalmAlias.query.all()
         contains_palm = check_for_palm(palm_names, palm_ingredients, palm_list, ingredients)
-
-        new_product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
-        data_model.db.session.add(new_product)
-        data_model.db.session.commit()
-
-        if contains_palm is False:
-            palm_ingredients = ""
-            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients}
-        elif contains_palm is True:
-            alias_description = create_palm_products(palm_ingredients, new_product)
-            palm_ingredients = set(palm_ingredients)
-            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "Alias_description": alias_description, "branded_food_category": branded_food_category}
+        product = data_model.Product.query.filter(data_model.Product.fdc_id == fdc_id).first()
         
+        if product is None:
+            new_product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
+            data_model.db.session.add(new_product)
+            data_model.db.session.commit()
+            if contains_palm is False:
+                palm_ingredients = ""
+                a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": new_product.id}
+            elif contains_palm is True:
+                alias_description = create_palm_products(palm_ingredients, new_product)
+                palm_ingredients = set(palm_ingredients)
+                a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "Alias_description": alias_description, "branded_food_category": branded_food_category, "product_id": new_product.id}
+        else:
+            a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}
+            if contains_palm is False:
+                palm_ingredients = ""
+                a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}
+            elif contains_palm is True:
+                palm_ingredients = set(palm_ingredients)
+                a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "Palm_ingredients": palm_ingredients, "branded_food_category": branded_food_category, "product_id": product.id}
+
         all_results.append(a_result)
         
     return all_results

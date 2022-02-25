@@ -20,7 +20,7 @@
   <br>
   {% for result in search_results %}
   <a> 
-    Product: {{result.Name}}: {{result.Descriptor}}</a> 
+    Product: {{result.Name}}: {{result.Descriptor}} {{result.product_id}}</a> 
   <br>
   <a> Brand Owner: {{result.Brand_owner}}</a>
   <br>
@@ -34,15 +34,25 @@
 
   <a>  {{result.Palm_ingredients}}
     <br>
-    <a> Relation to palm {{result.Alias_description}}</a>
-    <br>
     <a> Branded Food Category: {{result.branded_food_category}}</a>
     <br>
     <form action="/alternatives">
       <button type="submit" name="alternative" value="{{result.branded_food_category}}">Palm Free Alternatives</button>
       </a>
       <br>
+      
     </form>
+    {% else %}
+    {% if email %}
+    <br>
+    <button class="saveAlternativeButton" id="{{result.product_id}}" type="button" name="saveAlternative" value="{{result.product_id}}">Save Product</button>
+    </a>
+      <br>
+      {% else %}
+      <form action="/alternatives">
+        <button disabled type="submit" name="dontsaveAlternative" >Save Product</button>
+      </form>
+    {% endif %}
     {% endif %}
 
   <a> All Ingredients: {{result.Ingredients}}</a>
@@ -55,5 +65,5 @@
 <br>
 </body>
 </html>
-
+<script src="/static/palmApp.js" type ="text/javascript"></script>
 {% endblock %}

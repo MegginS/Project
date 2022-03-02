@@ -24,3 +24,6 @@ for alias in alias_data:
 
 data_model.db.session.add_all(aliases_in_db)
 data_model.db.session.commit()
+
+
+# pg_dump db_name > file.sql

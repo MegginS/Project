@@ -1,13 +1,14 @@
 import requests
 import re
 
-
+with open('news_key.txt') as f:
+    api_key = f.readline().strip()
 
 def news_api_results():
     news_payload = {
-                'q': 'palm oil destruction',
-                'from': '2022-02-01',
-                'apiKey': '7873c5eaa73d4b5d935a47b3422c93ca',
+                'q': 'palm oil deforestation',
+                'from': '2022-02-15',
+                'apiKey': api_key,
                 'sortBy': 'relevancy',
                 'pageSize': '30'
                 }

@@ -9,7 +9,10 @@ import bcrypt
 app = Flask(__name__)
 
 from jinja2 import StrictUndefined
-app.secret_key = "secret"
+with open('flask_key.txt') as f:
+    app.secret_key = f.readline().strip()
+
+
 app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
@@ -152,12 +155,12 @@ def news():
     return render_template('news.html', all_articles = all_articles, email = email)
 
 
-@app.route('/map')
-def deforestation_map():
-    """View map of rainforest deforestation from Palm Oil"""
+# @app.route('/map')
+# def deforestation_map():
+#     """View map of rainforest deforestation from Palm Oil"""
 
-    email = session.get('email')
-    return render_template('map.html', email = email)
+#     email = session.get('email')
+#     return render_template('map.html', email = email)
 
 
 

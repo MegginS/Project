@@ -1,4 +1,23 @@
 import data_model
+import requests
+
+with open('api_keys.txt') as f:
+    api_key = f.readline().strip()
+
+def search_payload(searched_item):
+    payload = {
+                'query': searched_item,
+                'dataType': 'Branded',
+                'pageSize': '3',
+                'api_key': api_key
+                }
+
+    search = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search', params = payload)
+    result = search.json()
+    foods = result['foods']
+
+    return foods, result
+
 
 def check_for_palm(palm_names, palm_ingredients, palm_list, ingredients):
         contains_palm = False

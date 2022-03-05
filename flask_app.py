@@ -5,6 +5,7 @@ from flask import (Flask, render_template, request, flash, session,
 import data_model
 import api_calls, news_api, api_alternatives, functions
 import bcrypt
+import requests
 
 app = Flask(__name__)
 
@@ -28,8 +29,20 @@ def results():
     """View/save results of a search"""
 
     email = session.get('email')
-
     searched_item = request.args.get("searchedItem")
+
+    with open('api_keys.txt') as f:
+        api_key = f.readline().strip()
+    payload = {'query': searched_item,'dataType': 'Branded','api_key': api_key}
+
+    try:
+        response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/search', params = payload)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        return redirect('/')
+    except requests.exceptions.RequestException:
+        return redirect('/')
+
     search_results = api_calls.api_results(searched_item)
     
     if email is None:
@@ -44,6 +57,7 @@ def show_alternatives():
     email = session.get('email')
     
     food_category = request.args.get("alternative")
+    
     all_alternatives = api_alternatives.api_alternatives(food_category)
 
     if email is None:

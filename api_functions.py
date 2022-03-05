@@ -17,24 +17,6 @@ def search_payload(searched_item):
     foods = result['foods']
 
     return foods, result
-
-
-# def check_for_palm(palm_names, palm_ingredients, palm_list, ingredients):
-#         contains_palm = False
-
-#         if palm_names != []:
-#             contains_palm = True
-#             for palm_name in palm_names:
-#                 palm_name = palm_name.strip(" ")
-#                 palm_ingredients.append(palm_name)
-
-#         for palm_alias in palm_list:
-#             if palm_alias.alias_name in ingredients:
-#                 contains_palm = True
-#                 if palm_alias.alias_name not in palm_ingredients:
-#                     palm_ingredients.append(palm_alias.alias_name)
-
-#         return contains_palm
         
 def check_for_palm(palm_names, palm_ingredients, palm_list, ingredients):
         contains_palm = "Doesn't contain palm oil"

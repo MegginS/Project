@@ -70,7 +70,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(50), nullable=True)
     descriptor = db.Column(db.String(200), nullable = True)
-    contains_palm = db.Column(db.String(10), nullable = True)
+    contains_palm = db.Column(db.String(200), nullable = True)
     fdc_id = db.Column(db.Integer, nullable = True)
     ingredients = db.Column(db.ARRAY(db.String), nullable = True)
     brand = db.Column(db.String(50), nullable=True)
@@ -130,6 +130,21 @@ def create_alias(alias_name, description):
                             description = description)
     return palm_alias
 
+class PossiblePalm(db.Model):
+    """A palm alias"""
+
+    __tablename__ = "possible_palm_aliases"
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    alias_name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+
+def create_possible_alias(alias_name, description):
+    "Create and return a possible palm alias"
+    palm_alias = PossiblePalm(
+                            alias_name = alias_name,
+                            description = description)
+    return palm_alias
 
 def connect_to_db(flask_app, db_uri="postgresql:///palm", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
@@ -144,4 +159,4 @@ if __name__ == "__main__":
     from flask_app import app
     connect_to_db(app)
 
-    palm_list = PalmAlias.query.all()
+    # palm_list = PalmAlias.query.all()

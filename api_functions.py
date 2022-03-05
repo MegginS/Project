@@ -8,7 +8,7 @@ def search_payload(searched_item):
     payload = {
                 'query': searched_item,
                 'dataType': 'Branded',
-                'pageSize': '3',
+                'pageSize': '10',
                 'api_key': api_key
                 }
 
@@ -19,23 +19,41 @@ def search_payload(searched_item):
     return foods, result
 
 
+# def check_for_palm(palm_names, palm_ingredients, palm_list, ingredients):
+#         contains_palm = False
+
+#         if palm_names != []:
+#             contains_palm = True
+#             for palm_name in palm_names:
+#                 palm_name = palm_name.strip(" ")
+#                 palm_ingredients.append(palm_name)
+
+#         for palm_alias in palm_list:
+#             if palm_alias.alias_name in ingredients:
+#                 contains_palm = True
+#                 if palm_alias.alias_name not in palm_ingredients:
+#                     palm_ingredients.append(palm_alias.alias_name)
+
+#         return contains_palm
+        
 def check_for_palm(palm_names, palm_ingredients, palm_list, ingredients):
-        contains_palm = False
+        contains_palm = "Doesn't contain palm oil"
 
         if palm_names != []:
-            contains_palm = True
+            contains_palm = "THIS PRODUCT CONTAINS PALM OIL"
             for palm_name in palm_names:
                 palm_name = palm_name.strip(" ")
                 palm_ingredients.append(palm_name)
 
         for palm_alias in palm_list:
-            if palm_alias.alias_name in ingredients:
-                contains_palm = True
+            palm_alias_name = palm_alias.alias_name
+            if palm_alias_name.upper() in ingredients:
+                contains_palm = "THIS PRODUCT CONTAINS PALM OIL"
                 if palm_alias.alias_name not in palm_ingredients:
                     palm_ingredients.append(palm_alias.alias_name)
 
-        return contains_palm
-        
+        return contains_palm, palm_ingredients
+
 def create_palm_products(palm_ingredients, new_product):
     alias_description = []
 

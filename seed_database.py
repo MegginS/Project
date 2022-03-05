@@ -22,8 +22,19 @@ for alias in alias_data:
     created_alias = data_model.create_alias(alias_name, description)
     aliases_in_db.append(created_alias)
 
+
+with open('data/additional_aliases.json') as g:
+    alias_data = json.loads(g.read())
+
+possible_aliases_in_db = []
+for alias in alias_data:
+
+    alias_name = alias["alias_name"]
+    description = alias["description"]
+
+    created_alias = data_model.create_possible_alias(alias_name, description)
+    aliases_in_db.append(created_alias)
+
+
 data_model.db.session.add_all(aliases_in_db)
 data_model.db.session.commit()
-
-
-# pg_dump db_name > file.sql

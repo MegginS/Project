@@ -26,15 +26,12 @@
   <br>
   <a> Fdc_id: {{result.Fdc_id}} </a>
   <br>
-  Contains Palm: {{result.Contains_palm}} 
+  {{result.Contains_palm}} 
   <br>
+  {% if result.Contains_palm == "THIS PRODUCT CONTAINS PALM OIL" or result.Contains_palm == "This product has ingredients that may be derived from Palm Oil" %}
 
-
-  {% if result.Contains_palm == True %}
-
-  <a>  {{result.Palm_ingredients}}
+  <a>  Palm Ingredients: {{result.Palm_ingredients}}
     <br>
-    <a> Branded Food Category: {{result.branded_food_category}}</a>
     <br>
     <form action="/alternatives">
       <button type="submit" name="alternative" value="{{result.branded_food_category}}">Palm Free Alternatives</button>

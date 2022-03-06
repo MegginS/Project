@@ -4,18 +4,13 @@ import data_model
 from api_functions import check_for_palm, create_palm_products
 import json
 
-def api_alternatives(food_category):
-
-    # if food_category == "Cereal" or food_category =="Processed Cereal Products":
-    #     palm_ingredients = ""
-    #     alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": new_product.id}
-        
+def api_alternatives(food_category, pagesize = 10):
 
     payload = {"includeDataTypes":
                 {"Branded": True},
                 "referenceFoodsCheckBox": True,
                 "requireAllWords": True,
-                "pageSize": 20,
+                "pageSize": pagesize,
                 "generalSearchInput": food_category,
                 "sortDirection": None}
     
@@ -38,8 +33,7 @@ def api_alternatives(food_category):
         if name is None:
             name = ""
         name = name.title()
-        print("************************")
-        print(name)
+
         descriptor = result['foods'][i].get('description')
         if descriptor is None:
             descriptor = ""
@@ -60,9 +54,7 @@ def api_alternatives(food_category):
         palm_list = data_model.PalmAlias.query.all()
         contains_palm, palm_ingredients  = check_for_palm(palm_names, palm_ingredients, palm_list, ingredients)
         product = data_model.Product.query.filter(data_model.Product.fdc_id == fdc_id).first()
-        print("************************")
-        print(name)
-        print(contains_palm)
+
         if product is None:
             product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
             data_model.db.session.add(product)
@@ -76,5 +68,7 @@ def api_alternatives(food_category):
                 palm_ingredients = ""
                 alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}
                 all_alternatives.append(alt_result)
-
-    return all_alternatives
+    if len(all_alternatives) == 0:
+        all_alternatives = api_alternatives(food_category, pagesize = 150)
+    if len(all_alternatives) > 0:
+        return all_alternatives

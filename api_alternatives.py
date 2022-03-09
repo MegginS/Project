@@ -69,6 +69,8 @@ def api_alternatives(food_category, pagesize = 10):
                 alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}
                 all_alternatives.append(alt_result)
     if len(all_alternatives) == 0:
-        all_alternatives = api_alternatives(food_category, pagesize = 150)
+        all_alternatives = api_alternatives(food_category, pagesize = pagesize + 150)
+        if pagesize > 450:
+            return all_alternatives
     if len(all_alternatives) > 0:
         return all_alternatives

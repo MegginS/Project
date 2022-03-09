@@ -29,7 +29,8 @@ def news_api_results():
 
         article = {"news_source": news_source, "author": author, "title": title, "description": description, "url": url, "urlimage": urlimage}
         if article["news_source"] != "Reuters":
-            all_articles.append(article)
+            if "palm oil" in description or "deforestation" in description:
+                all_articles.append(article)
 
     return all_articles
    

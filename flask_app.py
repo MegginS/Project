@@ -76,11 +76,10 @@ def save_alt():
 
     product_id = request.json.get("productId")
     user_id = data_model.User.query.filter(data_model.User.email == email).first().id
-    print(product_id)
-    print(user_id)
-    print("***********************")
 
-    data_model.create_saved_product(product_id, user_id)
+    userproduct = data_model.UserProduct.query.filter(data_model.UserProduct.product_id == product_id).first()
+    if userproduct is None:
+        data_model.create_saved_product(product_id, user_id)
     return "success"
 
 @app.route('/profile')
@@ -169,12 +168,12 @@ def news():
     return render_template('news.html', all_articles = all_articles, email = email)
 
 
-# @app.route('/map')
-# def deforestation_map():
-#     """View map of rainforest deforestation from Palm Oil"""
+@app.route('/FAQ')
+def information():
+    """Information page on Oil Palm """
 
-#     email = session.get('email')
-#     return render_template('map.html', email = email)
+    email = session.get('email')
+    return render_template('info.html', email = email)
 
 
 

@@ -13,27 +13,32 @@
 
 <body>
 
-  <h1>Saved Products</h1>
-
+  <h2>Saved Products</h2>
+<div class = "light">
   <br>
   {% if favorites != [] %}
   {% for favorite in favorites %}
+  <div class="container-fluid">
+    <div class="row">
+  <div class="col-4">
   <a> 
     Product: {{favorite.name}}: {{favorite.descriptor}}</a> 
   <br>
   <a> Brand Owner: {{favorite.brand}}</a>
   <br>
   <a> Fdc_id: {{favorite.fdc_id}} </a>
-  <br>
-  <br>
-  <a> All Ingredients: {{favorite.ingredients}}</a>
-  <br>
-  <br>
+  <br><br>
+  </div>
+  <div class="col-8">
+  <a> Ingredients: <font size="-4">{{favorite.ingredients}}</font></a>
+  <br>  <br>
+</div>
   {% endfor %}
   {% endif %}
 </a>
 <br>
 <br>
+</div>
 </body>
 </html>
 

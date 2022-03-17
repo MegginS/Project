@@ -15,8 +15,8 @@
 
 <body>
 
-  <h1>Results</h1>
-
+  <h2>Results</h2>
+  <div class = "light">
   <br>
   {% for result in search_results %}
   <a> 
@@ -30,7 +30,8 @@
   <br>
   {% if result.Contains_palm == "THIS PRODUCT CONTAINS PALM OIL" or result.Contains_palm == "This product has ingredients that may be derived from Palm Oil" %}
 
-  <a>  Palm Ingredients: {{result.Palm_ingredients}}
+  <a>  Palm Ingredients: {{result.Palm_ingredients}}</a><br>
+  <a> <font size="-3">All Ingredients: {{result.Ingredients}}</font></a>
     <br>
     <br>
     <form action="/alternatives">
@@ -52,7 +53,7 @@
     {% endif %}
     {% endif %}
 
-  <a> All Ingredients: {{result.Ingredients}}</a>
+
   <br>
   <br>
   <br>
@@ -60,6 +61,7 @@
 </a>
 <br>
 <br>
+  </div>
 </body>
 </html>
 <script src="/static/palmApp.js" type ="text/javascript"></script>

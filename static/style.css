@@ -1,80 +1,28 @@
 
 
 
-/* Color Theme Swatches in RGBA */
-.color-theme_download-(1)-1-rgba { color: rgba(16, 38, 1, 1); }
-.color-theme_download-(1)-2-rgba { color: rgba(86, 102, 50, 1); }
-.color-theme_download-(1)-3-rgba { color: rgba(208, 158, 30, 1); }
-.color-theme_download-(1)-4-rgba { color: rgba(140, 28, 3, 1); }
-.color-theme_download-(1)-5-rgba { color: rgba(64, 1, 1, 1); }
-
-
 body {
-  font-family: monospace;
-  font-size: 20px;
-  background-color:white);
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  background-image: linear-gradient(rgba(68, 34, 23, 0.35), rgb(47, 23, 15, 0.40)), url("/static/img/background1.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
 }
 
 
-p.accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-  border: none;
-  outline: none;
-  transition: 0.4s;
-  margin-bottom:10px;
-}
-
-/* Add a background color to the accordion if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-p.accordion.active, p.accordion:hover {
-  background-color: #ddd;
-}
-
-/* Unicode character for "plus" sign (+) */
-p.accordion:after {
-  content: '\2795'; 
-  font-size: 13px;
-  color: #777;
+.light {
+  font-size: 16px;
+  color: rgb(250, 222, 175);
   float: right;
   margin-left: 5px;
-}
-
-/* Unicode character for "minus" sign (-) */
-p.accordion.active:after {
-  content: "\2796"; 
-}
-
-/* Style the element that is used for the panel class */
-
-div.panel {
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: 0.4s ease-in-out;
-  opacity: 0;
-  margin-bottom:10px;
-}
-
-div.panel.show {
-  opacity: 1;
-  max-height: 500px; /* Whatever you like, as long as its more than the height of the content (on all screen sizes) */
+  margin-top: 15px;
 }
 
 ul {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
-  background-color: rgb(16, 80, 16);
+  background-color: rgba(250, 222, 175, 0.20);
 }
 
 li {
@@ -83,7 +31,7 @@ li {
 
 li a {
   display: block;
-  color: white;
+  color: rgba(96, 129, 148, 0.99);
   text-align: center;
   padding: 10px 16px;
   text-decoration: none;
@@ -99,13 +47,29 @@ li b {
 }
 
 li a:hover {
-  background-color: rgb(8, 40, 8);
+  background-color: rgba(75, 31, 4, 0.35);
+  color: rgba(96, 129, 148, .85);
 }
 
 h1 {
-  display: block;
-  color: rgb(8, 40, 8);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  color: rgba(96, 129, 148, .85);
+  background-color: rgba(75, 31, 4, 0.35);
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 0%;
+  margin-bottom: 0%;
+}
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 35px;
+  font-weight: bold;
+  color: rgba(96, 129, 148, .85);
   text-align: left;
-  margin: 0;
-  padding: 1%;
+  padding-top: 1%;
+  padding-bottom: 0%;
+  margin-bottom: 0%;
 }

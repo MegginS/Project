@@ -5,8 +5,23 @@
 <!DOCTYPE html>
 
 <html>
-  <div class="col-3">
-    <div class="light">
+  <head>
+    <style>
+      .tiger {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url("/static/img/background3.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+  
+    </style>
+  </head>
+  
+  
+  <body class = "tiger light">
+
 <h2>Please Sign In</h2>
   
   <form action="/profile" method="POST">
@@ -24,7 +39,6 @@
       <br>
       <span>Don't have an account? <a href="new_user">Sign up</a></span>
 
-  </div>
   </form>
 
 </body>

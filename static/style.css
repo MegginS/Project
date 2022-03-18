@@ -2,7 +2,7 @@
 
 
 body {
-  background-image: linear-gradient(rgba(68, 34, 23, 0.35), rgb(47, 23, 15, 0.40)), url("/static/img/background1.jpg");
+  background-image: linear-gradient(rgba(34, 16, 11, 0.35), rgb(25, 11, 7, 0.40)), url("/static/img/background1.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -12,17 +12,28 @@ body {
 
 
 .light {
-  font-size: 16px;
+  font-size: 17px;
   color: rgb(250, 222, 175);
   float: right;
   margin-left: 5px;
   margin-top: 15px;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+
+.backfill {
+  background-color: rgba(75, 31, 4, 0.25);
 }
 
 ul {
   list-style-type: none;
   overflow: hidden;
-  background-color: rgba(250, 222, 175, 0.20);
+  background-color: rgba(75, 31, 4, 0.20);
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0%;
+  padding-bottom: 0%
 }
 
 li {
@@ -35,6 +46,7 @@ li a {
   text-align: center;
   padding: 10px 16px;
   text-decoration: none;
+  font-size: 20px;
 }
 
 li b {

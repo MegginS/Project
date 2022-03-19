@@ -8,12 +8,21 @@
 <html>
 <head>
   <title> Palm Oil Results</title>
-  <!-- <link rel="stylesheet" href="static/style.css"> -->
+  <style>
+    .monkey1 {
+  background-image: linear-gradient(rgba(34, 16, 11, 0.6), rgb(25, 11, 7, 0.6)), url("/static/img/background2.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
 
+  </style>
 </head>
 
 
-<body>
+<body class = "monkey1">
 
   <h2>Results</h2>
   <div class = "light">
@@ -31,7 +40,7 @@
   {% if result.Contains_palm == "THIS PRODUCT CONTAINS PALM OIL" or result.Contains_palm == "This product has ingredients that may be derived from Palm Oil" %}
 
   <a>  Palm Ingredients: {{result.Palm_ingredients}}</a><br>
-  <a> <font size="-3">All Ingredients: {{result.Ingredients}}</font></a>
+  <a> All Ingredients: <font size="-2">{{result.Ingredients}}</font></a>
     <br>
     <br>
     <form action="/alternatives">

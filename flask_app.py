@@ -125,14 +125,14 @@ def handle_logout():
 @app.route('/new_user')
 def show_new_user():
 
-    email = session.get('email')
-    return render_template('new_user.html', email = email)
+    # email = session.get('email')
+    return render_template('new_user.html', email = None)
 
 @app.route('/forgot_password')
 def forgot_password():
 
     email = session.get('email')
-    return render_template('forgot_password.html', email = email)    
+    return render_template('forgot_password.html', email = email)
 
 @app.route('/new_user', methods = ['POST'])
 def add_new_user():
@@ -153,7 +153,7 @@ def add_new_user():
         if password == password_check:
             hashed = bcrypt.hashpw(password, bcrypt.gensalt()).decode("utf-8")
             data_model.create_user(email = email, password = hashed, first_name = first_name, last_name = last_name)
-            return render_template('login.html', email = email)
+            return render_template('login.html', email = None)
         else:
             flash("Username and Password do not match")
             return render_template('new_user.html', email = None)

@@ -21,6 +21,11 @@ body {
   padding-bottom: 0%;
 }
 
+.center {
+  text-align: left;
+  font-size: 25px;
+}
+
 .backfill {
   background-color: rgba(75, 31, 4, 0.25);
 }

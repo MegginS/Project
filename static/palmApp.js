@@ -1,6 +1,7 @@
 const alternativeButtons = document.getElementsByClassName("saveAlternativeButton")
 console.log(alternativeButtons)
 
+
 for(let i=0; i<alternativeButtons.length; i++){
   alternativeButtons[i].addEventListener("click", function(e) { 
     e.preventDefault();
@@ -12,8 +13,9 @@ for(let i=0; i<alternativeButtons.length; i++){
         'Content-Type': 'application/json',
       }
     })
-    .then((response) => {console.log(response)})
-    .catch((error) => {console.log(error)})
+    .then(response => response.json())
+    .then(alert("Product Added")
+    );
   })
 }
 

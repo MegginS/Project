@@ -78,6 +78,7 @@ def save_alt():
     user_id = data_model.User.query.filter(data_model.User.email == email).first().id
 
     userproduct = data_model.UserProduct.query.filter(data_model.UserProduct.product_id == product_id).first()
+    
     if userproduct is None:
         data_model.create_saved_product(product_id, user_id)
     return "success"
@@ -91,6 +92,7 @@ def show_login():
         favorites = functions.load_favorites(email)
         user = data_model.User.query.filter(data_model.User.email == email).first().first_name
         user = user.title()
+
         return render_template('profile.html', email = email, favorites = favorites, user = user)
     else:
         return render_template('login.html', email = email)
@@ -101,14 +103,16 @@ def handle_login():
 
     email = request.form["email"]
     password = bytes(request.form["password"], "utf-8")
-    user = data_model.User.query.filter(data_model.User.email == email).all()
+    username = data_model.User.query.filter(data_model.User.email == email).all()
+    user = data_model.User.query.filter(data_model.User.email == email).first().first_name
+    user = user.title()
 
-    if len(user) > 0:
-        hashedpassword = bytes(user[0].password, "utf-8")
+    if len(username) > 0:
+        hashedpassword = bytes(username[0].password, "utf-8")
         if bcrypt.checkpw(password, hashedpassword):
             session['email'] = email
             favorites = functions.load_favorites(email)
-            return render_template('profile.html', email = email, favorites = favorites)
+            return render_template('profile.html', email = email, favorites = favorites, user = user)
         else:
             flash("Invalid Password")
             return render_template('login.html', email = None)

@@ -5,8 +5,6 @@ from api_functions import check_for_palm, create_palm_products, search_payload
 def api_results(searched_item):
 
     foods, result = search_payload(searched_item)
-    # if foods = None:
-    #     return redirect
 
     p = re.compile(r'([^,]*PALM[^,]*),')
     pp = re.compile(r'([^,]*TOCOPHER[^,]*),')

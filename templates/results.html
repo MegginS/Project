@@ -37,11 +37,13 @@
   <br>
   {{result.Contains_palm}} 
   <br>
+
+  <a> All Ingredients: <font size="-2">{{result.Ingredients}}</font></a>
+  <br>
   {% if result.Contains_palm == "THIS PRODUCT CONTAINS PALM OIL" or result.Contains_palm == "This product has ingredients that may be derived from Palm Oil" %}
 
   <a>  Palm Ingredients: {{result.Palm_ingredients}}</a><br>
-  <a> All Ingredients: <font size="-2">{{result.Ingredients}}</font></a>
-    <br>
+  <!-- <a> All Ingredients: <font size="-2">{{result.Ingredients}}</font></a> -->
     <br>
     <form action="/alternatives">
       <button type="submit" name="alternative" value="{{result.branded_food_category}}">Palm Free Alternatives</button>

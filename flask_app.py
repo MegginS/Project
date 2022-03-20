@@ -89,7 +89,9 @@ def show_login():
 
     if email:
         favorites = functions.load_favorites(email)
-        return render_template('profile.html', email = email, favorites = favorites)
+        user = data_model.User.query.filter(data_model.User.email == email).first().first_name
+        user = user.title()
+        return render_template('profile.html', email = email, favorites = favorites, user = user)
     else:
         return render_template('login.html', email = email)
 

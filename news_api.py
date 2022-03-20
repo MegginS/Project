@@ -1,5 +1,4 @@
 import requests
-import re
 
 with open('news_key.txt') as f:
     api_key = f.readline().strip()

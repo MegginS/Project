@@ -1,85 +1,59 @@
 {% extends 'base.html' %}
-{% block title %}Palm Oil Results{% endblock %}
 
 {% block body %}
 
 <!DOCTYPE html>
 
 <html>
-<head>
-  <title> Palm Oil Results</title>
-  <style>
-    .monkey1 {
-  background-image: linear-gradient(rgba(34, 16, 11, 0.6), rgb(25, 11, 7, 0.6)), url("/static/img/background2.jpg");
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-}
+  <head>
+    <title> Palm Oil Results</title>
+  </head>
 
-  </style>
-</head>
-
-
-<body class = "monkey1">
-
-
-  <h2>Results</h2>
-
-  <br>
-  {% for result in search_results %}
-  <a> 
-    <div class = "light">
-      <div class="row">
-          <div class="col-3">
-
-    Product: {{result.Name}}: {{result.Descriptor}}</a> 
-  <br>
-  <a> Brand Owner: {{result.Brand_owner}}</a>
- 
-  
-  <br>
-  {{result.Contains_palm}} 
-  <br>
-  {% if result.Contains_palm == "THIS PRODUCT CONTAINS PALM OIL" or result.Contains_palm == "This product has ingredients that may be derived from Palm Oil" %}
-
-  <a>  Palm Ingredients: {{result.Palm_ingredients}}</a><br>
-
-   
-    <form action="/alternatives">
-      <button type="submit" name="alternative" value="{{result.branded_food_category}}">Palm Free Alternatives</button>
-      </a>
+  <body class = "monkey1">
+    <h2>Results</h2>
       <br>
-      
-    </form>
-    {% else %}
-    {% if email %}
-    <br>
-    <button class="saveAlternativeButton" id="{{result.product_id}}" type="button" name="saveAlternative" value="{{result.product_id}}">Save Product</button>
-    </a>
-      <br>
-      {% else %}
-      <form action="/alternatives">
-        <button disabled type="submit" name="dontsaveAlternative" >Save Product</button>
-      </form>
-    {% endif %}
-    {% endif %}
-
-    <br>
-  </div>
-  <div class="col-4">
-    <a> All Ingredients: <font size="-2">{{result.Ingredients}}</font></a>
-  </div>
-  <br>
-  <br>
-  <br>
-  {% endfor %}
-</a>
-<br>
-<br>
-  </div>
-</body>
+        {% for result in search_results %}
+          <div class = "light">
+            <div class="row">
+                <div class="col-4">
+                  <a>Product: {{result.Name}}: {{result.Descriptor}}</a> 
+                    <br>
+                  <a> Brand Owner: {{result.Brand_owner}}</a>
+                    <br>
+                  <a>{{result.Contains_palm}}</a>
+                    <br>
+                    {% if result.Contains_palm == "THIS PRODUCT CONTAINS PALM OIL" or 
+                    result.Contains_palm == "This product has ingredients that may be derived from Palm Oil" %}
+                      <a>  Palm Ingredients: {{result.Palm_ingredients}}</a><br>
+                        <form action="/alternatives">
+                          <button type="submit" name="alternative" value="{{result.branded_food_category}}">
+                            Palm Free Alternatives
+                          </button>
+                        </form>
+                      <br>
+                    {% else %}
+                      {% if email %}
+                        <br>
+                          <button class="saveAlternativeButton" id="{{result.product_id}}" type="button" 
+                            name="saveAlternative" value="{{result.product_id}}">Save Product
+                          </button>
+                        <br>
+                      {% else %}
+                        <form action="/alternatives">
+                          <button disabled type="submit" name="dontsaveAlternative" >Save Product</button>
+                        </form>
+                      {% endif %}
+                    {% endif %}
+                      <br>
+                 </div>
+                   <div class="col-8">
+                    <a> All Ingredients: <font size="-2">{{result.Ingredients}}</font></a>
+                  </div>
+                    <br><br><br>
+              </div>
+          </div>
+        {% endfor %}
+  </body>
 </html>
 <script src="/static/palmApp.js" type ="text/javascript"></script>
 {% endblock %}

@@ -104,11 +104,12 @@ def handle_login():
     email = request.form["email"]
     password = bytes(request.form["password"], "utf-8")
     username = data_model.User.query.filter(data_model.User.email == email).all()
-    user = data_model.User.query.filter(data_model.User.email == email).first().first_name
-    user = user.title()
+ 
 
     if len(username) > 0:
         hashedpassword = bytes(username[0].password, "utf-8")
+        user = data_model.User.query.filter(data_model.User.email == email).first().first_name
+        user = user.title()
         if bcrypt.checkpw(password, hashedpassword):
             session['email'] = email
             favorites = functions.load_favorites(email)
@@ -118,7 +119,7 @@ def handle_login():
             return render_template('login.html', email = None)
 
     else:
-        return render_template('login.html', email = email)
+        return render_template('login.html', email = None)
 
 @app.route('/logout')
 def handle_logout():
@@ -131,14 +132,13 @@ def handle_logout():
 @app.route('/new_user')
 def show_new_user():
 
-    # email = session.get('email')
     return render_template('new_user.html', email = None)
 
 @app.route('/forgot_password')
 def forgot_password():
 
     email = session.get('email')
-    return render_template('forgot_password.html', email = email)
+    return render_template('forgot_password.html', email = None)
 
 @app.route('/new_user', methods = ['POST'])
 def add_new_user():
@@ -180,7 +180,6 @@ def information():
 
     email = session.get('email')
     return render_template('info.html', email = email)
-
 
 
 if __name__ == "__main__":

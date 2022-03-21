@@ -1,74 +1,66 @@
 {% extends 'base.html' %}
 
-<!-- {% block title %}Palm Oil Home{% endblock %} -->
 {% block body %}
 
 <!DOCTYPE html>
 
 
 <html>
-<head>
-  <title> Palm Oil Homepage</title>
-  <!-- <link rel="stylesheet" href="definestatic/style.css"> -->
-</head>
+  <head>
+    <title> Palm Oil Homepage</title>
+  </head>
 
-
-<body>
-
-<div class="col-4 backfill">
-
-
-<p class = light> 
-<br>
-  Palm oil is a vegetable oil derived from oil palm trees. 
-  These trees are native to Africa but are now being grown 
-  around the world, particularly in Southeast Asia. The rainforests 
-  of Indonesia and Malaysia are being burned, logged, and cleared to make 
-  way for palm oil plantations. Palm oil can be found in 50% of 
-  all packaged products we find in supermarkets, including food, hair 
-   care products, cosmetics, and cleaning supplies. 
-
-  <br><br>
-  In 1978, palm oil was grown on 9 million acres, the vast majority
-   in its native Africa. In 2018, that number increased to 47 million
-    acres with the vast majority being grown in Southeast Asia, on
-     land that was previously biodiverse forest. As palm oil demand continues 
-     to rise, more forest is being cleared to accommodate for palm oil
-      plantations. The islands of Sumatra and Borneo are at the forefront
-       of the deforestation. These biodiverse islands have created 
-       habitats for thousands of unique species including the last 
-       remaining orangutangs, pygmy elephants, Sumatran rhinoceroses, 
-       and Sumatran tigers.  Palm oil plantations threaten the survival 
-       of these critically endangered species as well as another 189 
-       threatened species that has palm oil production listed as one of
-        their main threats. 
-    <br><br>
-    The consequences of palm oil production have led to consumer boycotts. 
-    Some companies have bypassed the boycotts by not explicitly labeling
-     ingredients as “palm-oil” leaving the ethical consumer unaware that the 
-     product contains palm oil. The European Union passed regulations so 
-     that European consumers are aware if palm oil is in a product. If the 
-     product contains palm oil, then it must be labeled as such. However, 
-     in the United States palm oil can be listed under 200+ different names. 
-     This site was created to help you determine whether a product is made
-    with palm oil. Use the Palm Oil Search to see if a product is made with palm.
-    </p>
-  
-</div>
-<div class="col-4"></div>
-<div class="col-4">
-
-  <div class="light text-right">
-<h2>Palm Oil Search</h2>
-<form action="/results" method="GET">
-    <div class="search">
-      <input type="text" name="searchedItem" placeholder="Food Product">
+  <body>
+    <div class="col-4 backfill">
+      <div class = light> 
+        <br>
+          Palm oil is a vegetable oil derived from oil palm trees. 
+          These trees are native to Africa but are now being grown 
+          around the world, particularly in Southeast Asia. The rainforests 
+          of Indonesia and Malaysia are being burned, logged, and cleared to make 
+          way for palm oil plantations. Palm oil can be found in 50% of 
+          all packaged products we find in supermarkets, including food, hair 
+          care products, cosmetics, and cleaning supplies. 
+        <br><br>
+          In 1978, palm oil was grown on 9 million acres, the vast majority
+          in its native Africa. In 2018, that number increased to 47 million
+          acres with the vast majority being grown in Southeast Asia, on
+          land that was previously biodiverse forest. As palm oil demand continues 
+          to rise, more forest is being cleared to accommodate for palm oil
+          plantations. The islands of Sumatra and Borneo are at the forefront
+          of the deforestation. These biodiverse islands have created 
+          habitats for thousands of unique species including the last 
+          remaining orangutangs, pygmy elephants, Sumatran rhinoceroses, 
+          and Sumatran tigers.  Palm oil plantations threaten the survival 
+          of these critically endangered species as well as another 189 
+          threatened species that has palm oil production listed as one of
+          their main threats. 
+       <br><br>
+          The consequences of palm oil production have led to consumer boycotts. 
+          Some companies have bypassed the boycotts by not explicitly labeling
+          ingredients as “palm-oil” leaving the ethical consumer unaware that the 
+          product contains palm oil. The European Union passed regulations so 
+          that European consumers are aware if palm oil is in a product. If the 
+          product contains palm oil, then it must be labeled as such. However, 
+          in the United States palm oil can be listed under 200+ different names. 
+          This site was created to help you determine whether a product is made
+          with palm oil. Use the Palm Oil Search to see if a product is made with palm.
+      </div>
     </div>
-  <button class="searchButton" type="submit">Search</button>
-</form>
-</div>
-</div>
-</body>
+
+    <div class="col-4"></div>
+      <div class="col-4">
+        <div class="light text-right">
+          <h2>Palm Oil Search</h2>
+            <form action="/results" method="GET">
+                <div class="search">
+                  <input type="text" name="searchedItem" placeholder="Food Product">
+                </div>
+              <button class="searchButton" type="submit">Search</button>
+            </form>
+        </div>
+      </div>
+  </body>
 </html>
 
 {% endblock %}

@@ -1,55 +1,40 @@
 {% extends 'base.html' %}
-{% block title %} Your Name {% endblock %}
 
 {% block body %}
 
 <!DOCTYPE html>
 
 <html>
-<head>
-  <title> Your Profile</title>
-  
-  <style>
-    .tiger {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url("/static/img/background3.jpg");
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-}
+  <head>
+    <title> Your Profile</title>
+  </head>
 
-  </style>
-</head>
-
-
-<body class = "tiger">
-  <div class="col-6 light">
-
-  <h2>{{user}}'s Saved Products</h2>
-  <br>
-  {% if favorites != [] %}
-  {% for favorite in favorites %}
-  <div class="container-fluid">
-    <div class="row">
-  <div class="col-4">
-  <a> 
-     {{favorite.name}}: {{favorite.descriptor}}</a> 
-  <br>
-  <a> Brand Owner: {{favorite.brand}}</a>
-  <br><br>
-  </div>
-  <div class="col-8">
-  <a> Ingredients: <font size="-4">{{favorite.ingredients}}</font></a>
-  <br>  <br>
-</div>
-  {% endfor %}
-  {% endif %}
-</a>
-<br>
-<br>
-</div>
-</body>
+  <body class = "tiger">
+    <div class="col-6 light">
+      <h2>{{user}}'s Saved Products</h2>
+        <br>
+          {% if favorites != [] %}
+            {% for favorite in favorites %}
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-4">
+                   <a>{{favorite.name}}: {{favorite.descriptor}}</a> 
+                    <br>
+                   <a> Brand Owner: {{favorite.brand}}</a>
+                    <br><br>
+                  </div>
+                    <div class="col-8">
+                      <a> Ingredients: 
+                        <font size="-4">{{favorite.ingredients}}
+                        </font>
+                      </a>
+                        <br><br>
+                    </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+  </body>
 </html>
 
 {% endblock %}

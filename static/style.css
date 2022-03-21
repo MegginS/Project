@@ -10,6 +10,39 @@ body {
   font-size: 15px;
 }
 
+.tiger {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgb(0, 0, 0, 0.3)), url("/static/img/background3.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.monkey1 {
+  background-image: linear-gradient(rgba(34, 16, 11, 0.6), rgb(25, 11, 7, 0.6)), url("/static/img/background2.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.elephant {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)), url("/static/img/background6.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.rhino {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)), url("/static/img/background4.jpg");
+  background-attachment: fixed; 
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
 
 .light {
   font-size: 17px;

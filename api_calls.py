@@ -65,5 +65,3 @@ def api_results(searched_item):
         all_results.append(a_result)
         
     return all_results
-
- # ingredients and change boolean for comtains palm- yes, no -possibly

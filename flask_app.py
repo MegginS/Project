@@ -78,9 +78,8 @@ def save_alt():
     user_id = data_model.User.query.filter(data_model.User.email == email).first().id
 
     userproduct = data_model.UserProduct.query.filter(data_model.UserProduct.product_id == product_id, data_model.UserProduct.user_id == user_id).first()
-    print('Userproduct: %s' % userproduct)
+
     if userproduct is None:
-        print('Saving product for %s' % user_id)
         data_model.create_saved_product(product_id, user_id)
     return "success"
 

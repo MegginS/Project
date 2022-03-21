@@ -1,6 +1,10 @@
 const alternativeButtons = document.getElementsByClassName("saveAlternativeButton")
 console.log(alternativeButtons)
 
+function saved(e) {
+  let paragraph = document.getElementById("SAVED" + e.target.value)
+  paragraph.textContent = " *Saved to profile";
+}
 
 for(let i=0; i<alternativeButtons.length; i++){
   alternativeButtons[i].addEventListener("click", function(e) { 
@@ -14,7 +18,7 @@ for(let i=0; i<alternativeButtons.length; i++){
       }
     })
     .then(response => response.json())
-    .then(alert("Product Added")
+    .then(saved(e)
     );
   })
 }

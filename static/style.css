@@ -54,6 +54,16 @@ body {
   padding-bottom: 0%;
 }
 
+.blue {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(96, 129, 148, 0.99);
+  margin-left: 5px;
+  margin-top: 15px;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+
 .center {
   text-align: left;
   font-size: 25px;

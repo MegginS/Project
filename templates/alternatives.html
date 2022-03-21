@@ -19,10 +19,13 @@
                 <br>
                   <button class="saveAlternativeButton" id="{{result.product_id}}" type="button" 
                   name="saveAlternative" value="{{result.product_id}}">Save Alternative</button>
+                    <span class = "blue" id = "SAVED{{result.product_id}}"> 
+                    </span>
                 <br>
               {% else %}
+              <button disabled type="submit" name="dontsaveAlternative" >Save Alternative</button>
                 <br>
-                  <button disabled type="submit" name="dontsaveAlternative" >Save Alternative</button>
+                  
             {% endif %}
                 <br>
                 <a> Brand Owner: {{result.Brand_owner}}</a>

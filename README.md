@@ -17,8 +17,12 @@ Unearth Palm is not deployed, here is how to run the app locally:
 Clone the repository:
 
 ```
-git clone https://github.com/MegginS/Project.git
+git clone https://github.com/MegginS/UnearthPalm.git
 ```
+
+Prerequisites:
+* Python3
+* PostgreSQL
 
 Set up and activate a virtual environment, install dependencies:
 ```
@@ -28,7 +32,7 @@ virtualenv env
 source env/bin/activate
 pip3 install -r requirements.txt
 ```
-Setting up database:
+Setting up the database:
 
 ```
 python3 seed_database.py

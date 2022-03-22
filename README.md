@@ -10,16 +10,41 @@ The consequences of palm oil production have led to consumer boycotts. Some comp
    * **Database:** PostgreSQL
    * **API's:** FoodData Central API, USDA API (undocumented), News API
 
-## Installation [updating]
+## Installation
+
+Unearth Palm is not deployed, here is how to run the app locally:
+
+Clone the repository:
 
 ```
 git clone https://github.com/MegginS/Project.git
+```
+
+Set up and activate a virtual environment, install dependencies:
+```
 cd Project
+pip3 install virtualenv
+virtualenv env
+source env/bin/activate
 pip3 install -r requirements.txt
 ```
+Setting up database:
+
 ```
 python3 seed_database.py
+```
+
+Obtaining and using API Keys:
+* USDA API: request a key at https://fdc.nal.usda.gov/api-key-signup.html 
+* Save USDA key in a file labeled "api_keys.txt"
+* News API: request a key at https://newsapi.org/register
+* Save News API key in a file labeled "news_key.txt"
+* Add both text files to your .gitignore
+
+Running the application:
+```
 python3 flask_app.py
+Navigate to localhost:5000
 ```
 ## Contact 
 Meggin Simon: megginsimon@gmail.com

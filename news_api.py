@@ -6,7 +6,7 @@ with open('news_key.txt') as f:
 def news_api_results():
     news_payload = {
                 'q': 'palm oil deforestation',
-                'from': '2022-02-20',
+                'from': '2022-02-28',
                 'apiKey': api_key,
                 'sortBy': 'relevancy',
                 'pageSize': '30'

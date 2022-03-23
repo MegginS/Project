@@ -19,9 +19,8 @@ def api_alternatives(food_category, pagesize = 10):
     search = requests.post('https://fdc.nal.usda.gov/portal-data/external/search', data = payload, headers={"Content-Type": "application/json"})
     result = search.json()
 
-    p = re.compile(r'([^,]*PALM[^,]*),')
-    pp = re.compile(r'([^,]*TOCOPHER[^,]*),')
-
+    p = re.compile(r'([^,.]*PALM[^,.$]*)')
+    pp = re.compile(r'([^,.]*TOCOPHER[^,.$]*)')
     foods = result['foods']
 
     all_alternatives = []
@@ -61,8 +60,8 @@ def api_alternatives(food_category, pagesize = 10):
             data_model.db.session.commit()
         if contains_palm == "Doesn't contain palm oil":     
             palm_ingredients = []
-            palm_list = data_model.PossiblePalm.query.all()
             palm_names = pp.findall(ingredients_string)
+            palm_list = data_model.PossiblePalm.query.all()
             contains_palm, palm_ingredients = check_for_palm(palm_names, palm_ingredients, palm_list, ingredients)
             if contains_palm == "Doesn't contain palm oil":
                 palm_ingredients = ""

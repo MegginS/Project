@@ -6,8 +6,8 @@ def api_results(searched_item):
 
     foods, result = search_payload(searched_item)
 
-    p = re.compile(r'([^,]*PALM[^,]*),')
-    pp = re.compile(r'([^,]*TOCOPHER[^,]*),')
+    p = re.compile(r'([^,.]*PALM[^,.$]*)')
+    pp = re.compile(r'([^,.]*TOCOPHER[^,.$]*)')
     all_results = []
 
     for i in range(len(foods)):
@@ -38,7 +38,6 @@ def api_results(searched_item):
         
         palm_ingredients = []
         palm_names = p.findall(ingredients_string)
-        possible_palm_names = pp.findall(ingredients_string)
         palm_list = data_model.PalmAlias.query.all()
         contains_palm, palm_ingredients = check_for_palm(palm_names, palm_ingredients, palm_list, ingredients)
         product = data_model.Product.query.filter(data_model.Product.fdc_id == fdc_id).first()

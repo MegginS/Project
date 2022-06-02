@@ -30,7 +30,6 @@ def get_result_value(value):
 def check_re_palm(ingredients_string, palm_ingredients):
 
     contains_palm = "Doesn't contain palm oil"
-    # palm_names = []
 
     p = re.compile(r'([^,.]*PALM[^,.$]*)')
     pp = re.compile(r'([^,.]*TOCOPHER[^,.$]*)')
@@ -41,20 +40,11 @@ def check_re_palm(ingredients_string, palm_ingredients):
     if palm_names != []:
         contains_palm = "THIS PRODUCT CONTAINS PALM OIL"
         for palm_name in palm_names:
-            # palm_name = palm_name.strip(" ")
             palm_ingredients.append(palm_name.strip(" "))
 
     return contains_palm, palm_ingredients
     
 def check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm):
-    
-        # contains_palm = "Doesn't contain palm oil"
-
-        # if palm_names != []:
-        #     contains_palm = "THIS PRODUCT CONTAINS PALM OIL"
-        #     for palm_name in palm_names:
-        #         palm_name = palm_name.strip(" ")
-        #         palm_ingredients.append(palm_name)
 
         for palm_alias in palm_list:
             palm_alias_name = palm_alias.alias_name

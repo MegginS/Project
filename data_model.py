@@ -69,8 +69,8 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(50), nullable=True)
-    descriptor = db.Column(db.String(200), nullable = True)
-    contains_palm = db.Column(db.String(200), nullable = True)
+    descriptor = db.Column(db.String(400), nullable = True)
+    contains_palm = db.Column(db.String(300), nullable = True)
     fdc_id = db.Column(db.Integer, nullable = True)
     ingredients = db.Column(db.ARRAY(db.String), nullable = True)
     brand = db.Column(db.String(50), nullable=True)

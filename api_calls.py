@@ -27,12 +27,11 @@ def api_results(searched_item):
             product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
             data_model.db.session.add(product)
             data_model.db.session.commit()
-
+            
         if contains_palm == "Doesn't contain palm oil":
             palm_ingredients = []
             palm_list = data_model.PossiblePalm.query.all()
             contains_palm, palm_ingredients = check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm)
-            
             if contains_palm == "Doesn't contain palm oil":
                 a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}
             elif contains_palm == "THIS PRODUCT CONTAINS PALM OIL":

@@ -1,12 +1,15 @@
 import requests
+from datetime import date, timedelta
 
 with open('news_key.txt') as f:
     api_key = f.readline().strip()
 
+this_month = date.today() - timedelta(days = 28)
+
 def news_api_results():
     news_payload = {
                 'q': 'palm oil deforestation',
-                'from': '2022-02-28',
+                'from': this_month,
                 'apiKey': api_key,
                 'sortBy': 'relevancy',
                 'pageSize': '30'

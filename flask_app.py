@@ -46,7 +46,7 @@ def results():
     search_results = api_calls.api_results(searched_item)
     
     if email is None:
-        user_id = None
+        # user_id = None
         flash("Login to save products")
 
     return render_template('results.html', search_results = search_results, email = email)
@@ -55,9 +55,7 @@ def results():
 def show_alternatives():
     
     email = session.get('email')
-    
     food_category = request.args.get("alternative")
-    
     all_alternatives = api_alternatives.api_alternatives(food_category)
 
     if email is None:
@@ -73,7 +71,6 @@ def show_alternatives():
 def save_alt():
     
     email = session.get('email')
-
     product_id = request.json.get("productId")
     user_id = data_model.User.query.filter(data_model.User.email == email).first().id
 
@@ -91,7 +88,7 @@ def show_login():
     if email:
         favorites = functions.load_favorites(email)
         user = data_model.User.query.filter(data_model.User.email == email).first().first_name
-        user = user.title()
+        # user = user.title()
 
         return render_template('profile.html', email = email, favorites = favorites, user = user)
     else:
@@ -103,23 +100,18 @@ def handle_login():
 
     email = request.form["email"]
     password = bytes(request.form["password"], "utf-8")
-    username = data_model.User.query.filter(data_model.User.email == email).all()
- 
-
-    if len(username) > 0:
+    username = data_model.User.query.filter(data_model.User.email == email)
+    # .all()
+    if username:
         hashedpassword = bytes(username[0].password, "utf-8")
-        user = data_model.User.query.filter(data_model.User.email == email).first().first_name
-        user = user.title()
+        user = username.first().first_name
         if bcrypt.checkpw(password, hashedpassword):
             session['email'] = email
             favorites = functions.load_favorites(email)
             return render_template('profile.html', email = email, favorites = favorites, user = user)
-        else:
-            flash("Invalid Password")
-            return render_template('login.html', email = None)
 
-    else:
-        return render_template('login.html', email = None)
+    flash("Invalid Credentials")
+    return render_template('login.html', email = None)
 
 @app.route('/logout')
 def handle_logout():
@@ -137,7 +129,7 @@ def show_new_user():
 @app.route('/forgot_password')
 def forgot_password():
 
-    email = session.get('email')
+    # email = session.get('email')
     return render_template('forgot_password.html', email = None)
 
 @app.route('/new_user', methods = ['POST'])
@@ -184,4 +176,4 @@ def information():
 
 if __name__ == "__main__":
     data_model.connect_to_db(app)
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port = 8000, debug=True)

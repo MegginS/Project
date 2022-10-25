@@ -27,6 +27,15 @@ def get_result_value(value):
 
     return value
 
+def palm_search(palm_list, fdc_id, ingredients_string, ingredients):
+
+    palm_ingredients = []
+    contains_palm, palm_ingredients = check_re_palm(ingredients_string, palm_ingredients)
+    contains_palm, palm_ingredients = check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm)
+    product = data_model.Product.query.filter(data_model.Product.fdc_id == fdc_id).first()
+
+    return product, palm_ingredients, contains_palm
+
 def check_re_palm(ingredients_string, palm_ingredients):
 
     contains_palm = "Doesn't contain palm oil"

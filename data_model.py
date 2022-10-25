@@ -81,12 +81,16 @@ class Product(db.Model):
 
 def create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand):
     """Create and return a product."""
+
     product = Product(name = name,
                      descriptor = descriptor,
                      contains_palm = contains_palm,
                      fdc_id = fdc_id,
                      ingredients = ingredients,
                      brand = brand)
+
+    db.session.add(product)
+    db.session.commit()
 
     return product
 

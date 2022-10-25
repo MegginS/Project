@@ -1,12 +1,12 @@
 import data_model
-from api_functions import check_for_palm, create_palm_products, search_payload, check_re_palm, get_result_value
+from api_functions import check_for_palm, create_palm_products, search_payload, check_re_palm, get_result_value, palm_search
 
 def api_results(searched_item):
 
     foods, result = search_payload(searched_item)
     all_results = []
 
-    for i in range(len(foods)):
+    for i in range(len(foods)):  # save me
 
         name = get_result_value(result['foods'][i].get('brandName'))
         descriptor = get_result_value(result['foods'][i].get('description'))
@@ -15,23 +15,20 @@ def api_results(searched_item):
         branded_food_category = get_result_value(result['foods'][i].get('foodCategory'))
         ingredients_string = result['foods'][i].get('ingredients').upper().strip(".")
 
-        ingredients = ingredients_string.split(", ")
-        palm_ingredients = []
-
-        contains_palm, palm_ingredients = check_re_palm(ingredients_string, palm_ingredients)
-        palm_list = data_model.PalmAlias.query.all()
-        contains_palm, palm_ingredients = check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm)
-        product = data_model.Product.query.filter(data_model.Product.fdc_id == fdc_id).first()
+        ingredients = ingredients_string.split(", ") 
+        
+        product, palm_ingredients, contains_palm = palm_search(data_model.PalmAlias.query.all(), fdc_id, ingredients_string, ingredients)
 
         if product is None:
             product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
-            data_model.db.session.add(product)
-            data_model.db.session.commit()
+            # data_model.db.session.add(product)
+            # data_model.db.session.commit()
             
         if contains_palm == "Doesn't contain palm oil":
-            palm_ingredients = []
-            palm_list = data_model.PossiblePalm.query.all()
-            contains_palm, palm_ingredients = check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm)
+            product, palm_ingredients, contains_palm = palm_search(data_model.PossiblePalm.query.all(), fdc_id, ingredients_string, ingredients)
+            # palm_ingredients = []
+            # palm_list = data_model.PossiblePalm.query.all()
+            # contains_palm, palm_ingredients = check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm)
             if contains_palm == "Doesn't contain palm oil":
                 a_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}
             elif contains_palm == "THIS PRODUCT CONTAINS PALM OIL":

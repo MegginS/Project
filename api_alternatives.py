@@ -1,7 +1,7 @@
 import requests
 import re
 import data_model
-from api_functions import check_for_palm, create_palm_products, get_result_value, check_re_palm
+from api_functions import check_for_palm, create_palm_products, get_result_value, check_re_palm, palm_search
 import json
 
 def api_alternatives(food_category, pagesize = 10):
@@ -34,20 +34,14 @@ def api_alternatives(food_category, pagesize = 10):
         ingredients_string = result['foods'][i].get('ingredients').upper().strip(".")
         ingredients = ingredients_string.split(", ")
         
-        palm_ingredients = []
-        palm_list = data_model.PalmAlias.query.all()
-        contains_palm, palm_ingredients = check_re_palm(ingredients_string, palm_ingredients)
-        contains_palm, palm_ingredients = check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm)
-        product = data_model.Product.query.filter(data_model.Product.fdc_id == fdc_id).first()
+        product, palm_ingredients, contains_palm = palm_search(data_model.PalmAlias.query.all(), fdc_id, ingredients_string, ingredients)
 
         if product is None:
             product = data_model.create_product(name, descriptor, contains_palm, fdc_id, ingredients, brand)
-            data_model.db.session.add(product)
-            data_model.db.session.commit()
+            # data_model.db.session.add(product)
+            # data_model.db.session.commit()
         if contains_palm == "Doesn't contain palm oil":
-            palm_ingredients = []
-            palm_list = data_model.PossiblePalm.query.all()
-            contains_palm, palm_ingredients = check_for_palm(palm_ingredients, palm_list, ingredients, contains_palm)
+            product, palm_ingredients, contains_palm = palm_search(data_model.PossiblePalm.query.all(), fdc_id, ingredients_string, ingredients)
             if contains_palm == "Doesn't contain palm oil":
                 palm_ingredients = ""
                 alt_result = {"Name": name, "Descriptor": descriptor, "Fdc_id": fdc_id, "Brand_owner": brand, "Contains_palm": contains_palm, "Ingredients": ingredients, "product_id": product.id}

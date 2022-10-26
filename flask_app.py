@@ -13,15 +13,13 @@ from jinja2 import StrictUndefined
 with open('flask_key.txt') as f:
     app.secret_key = f.readline().strip()
 
-
 app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
     """View homepage, search."""
 
-    email = session.get('email')
-    return render_template('homepage.html', email = email)
+    return render_template('homepage.html', email = session.get('email'))
 
 
 @app.route('/results')
@@ -46,7 +44,6 @@ def results():
     search_results = api_calls.api_results(searched_item)
     
     if email is None:
-        # user_id = None
         flash("Login to save products")
 
     return render_template('results.html', search_results = search_results, email = email)
@@ -88,7 +85,6 @@ def show_login():
     if email:
         favorites = functions.load_favorites(email)
         user = data_model.User.query.filter(data_model.User.email == email).first().first_name
-        # user = user.title()
 
         return render_template('profile.html', email = email, favorites = favorites, user = user)
     else:
@@ -100,15 +96,14 @@ def handle_login():
 
     email = request.form["email"]
     password = bytes(request.form["password"], "utf-8")
-    username = data_model.User.query.filter(data_model.User.email == email)
-    # .all()
+    username = data_model.User.query.filter(data_model.User.email == email).all()
+
     if username:
         hashedpassword = bytes(username[0].password, "utf-8")
-        user = username.first().first_name
         if bcrypt.checkpw(password, hashedpassword):
             session['email'] = email
             favorites = functions.load_favorites(email)
-            return render_template('profile.html', email = email, favorites = favorites, user = user)
+            return render_template('profile.html', email = email, favorites = favorites, user = username[0].first_name)
 
     flash("Invalid Credentials")
     return render_template('login.html', email = None)
@@ -126,11 +121,12 @@ def show_new_user():
 
     return render_template('new_user.html', email = None)
 
+
 @app.route('/forgot_password')
 def forgot_password():
 
-    # email = session.get('email')
     return render_template('forgot_password.html', email = None)
+
 
 @app.route('/new_user', methods = ['POST'])
 def add_new_user():
@@ -139,41 +135,37 @@ def add_new_user():
     email = request.form["email"]
     password = request.form["password"].encode("utf-8")
     password_check = request.form["password2"].encode("utf-8")
-    first_name = request.form["first_name"]
-    last_name = request.form["last_name"]
 
     user = data_model.get_user_by_email(email)
 
-    if user:
-        flash("An account is already associated with this email")
-        return render_template('new_user.html', email = None)
-    else:
+    if not user:
         if password == password_check:
             hashed = bcrypt.hashpw(password, bcrypt.gensalt()).decode("utf-8")
-            data_model.create_user(email = email, password = hashed, first_name = first_name, last_name = last_name)
+            data_model.create_user(email = email, password = hashed, first_name = request.form["first_name"], last_name = request.form["last_name"])
             return render_template('login.html', email = None)
-        else:
-            flash("Username and Password do not match")
-            return render_template('new_user.html', email = None)
+        elif password != password_check:
+            flash("Passwords do not match")
+    else:
+        flash("An account is already associated with this email")
+    return render_template('new_user.html', email = None)
+
 
 @app.route('/news')
 def news():
     """View links to news articles."""
 
-    email = session.get('email')
     all_articles = news_api.news_api_results()
     
-    return render_template('news.html', all_articles = all_articles, email = email)
+    return render_template('news.html', all_articles = all_articles, email = session.get('email'))
 
 
 @app.route('/FAQ')
 def information():
     """Information page on Oil Palm """
 
-    email = session.get('email')
-    return render_template('info.html', email = email)
+    return render_template('info.html', email = session.get('email'))
 
 
 if __name__ == "__main__":
     data_model.connect_to_db(app)
-    app.run(host="0.0.0.0", port = 8000, debug=True)
+    app.run(host="0.0.0.0", port = 5000, debug=True)
